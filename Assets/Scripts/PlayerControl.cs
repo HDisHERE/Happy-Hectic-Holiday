@@ -8,12 +8,17 @@ public class PlayerControl : MonoBehaviour
     //Walk
     Rigidbody2D rb;
     public float moveSpeed = 2.5f;
+    private float x;
 
     //Jump
     [Range(0f, 30f)]
     public float jumpSpeed = 30.0f;
     private bool isJumping=false;
-    private float x;
+
+    //Better Jump
+    public float fallAdd;
+    public float jumpAdd;
+    private bool isHoldingJump=false;
 
     private Transform groundTf;
     // Start is called before the first frame update
@@ -26,8 +31,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Here is everything about input.
         x = Input.GetAxis("Horizontal");//Get input every frame.
-        isJumping = Input.GetButton("Jump");
+        isJumping = Input.GetButtonDown("Jump");
+        isHoldingJump = Input.GetButton("Jump");
 
         if (isOnGround() && isJumping)
         {
@@ -38,20 +45,31 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Here is everything about physical calculation.
         PosUpdate();
+        JumpUpdate();
     }
 
-    public void PosUpdate()
+    private void PosUpdate()
     {
         if (x != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(x), 1, 1);//Turn around the sprite. 
         }
 
-        rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);//Here I choose to change the velocity directly.
+        rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
+        //Here I choose to change the velocity directly.
         //Please notice that I changed the velocity directly instead of using force system. And there is a material
         //That erase all the friction on the wall to avoid bug that stick player to the wall, which means that
         //FORCE SYSTEM CAN'T BE USED TO CONTROL THE MOVEMENT IN THIS PROJECT. Otherwise everything is sliding.
+    }
+
+    private void JumpUpdate()
+    {
+        if(rb.velocity.y < 0) //When Falling
+        {
+        
+        }
     }
 
     public bool isOnGround()
