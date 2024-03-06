@@ -7,7 +7,6 @@ public class arrowScript : MonoBehaviour
 {
     Rigidbody2D rigidBody;
     PlayerControl playerControl;
-    GameObject Player;
 
     //speed of the arrow
     float moveSpeed = 10;
