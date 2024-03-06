@@ -7,6 +7,11 @@ public class PlayerControl : MonoBehaviour
     //Basic Data
     //Walk
     Rigidbody2D rb;
+
+    public Transform playerSpawnPoint;
+
+    CanvasHandlerScript canvasToggle;
+
     public float moveSpeed = 2.5f;
     private float x;
 
@@ -20,34 +25,56 @@ public class PlayerControl : MonoBehaviour
     public float jumpAdd;
     private bool isHoldingJump=false;
 
+    //Determines whether player is dead or alive
+    bool dead;
+
     private Transform groundTf;
     // Start is called before the first frame update
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
+        canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
+        Respawn();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Here is everything about input.
-        x = Input.GetAxis("Horizontal");//Get input every frame.
-        isJumping = Input.GetButton("Jump");
-        isHoldingJump = Input.GetButton("Jump");
+        if (!dead)
+        {
+            x = Input.GetAxis("Horizontal");//Get input every frame.
+            isJumping = Input.GetButton("Jump");
+            isHoldingJump = Input.GetButton("Jump");
+        }
 
         if (isOnGround() && isJumping)
         {
             //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
             rb.velocity = Vector2.up * jumpSpeed;
         }
-    }
 
+
+        if (Input.GetKeyDown(KeyCode.Space) && dead == true)
+        {
+            Respawn();
+            Debug.Log("Respawn attempt");
+        }
+
+    }
+        //if the player is dead, respawn them when they press space
+        
+    
+    
     private void FixedUpdate()
     {
         //Here is everything about physical calculation.
-        PosUpdate();
-        JumpUpdate();
+        if (!dead)
+        {
+            PosUpdate();
+            JumpUpdate();
+        }
     }
 
     private void PosUpdate()
@@ -82,5 +109,25 @@ public class PlayerControl : MonoBehaviour
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
         return Physics2D.OverlapCircle(groundTf.position, 0.02f, LayerMask.GetMask("ground"));
+    }
+    
+
+    public void Respawn()
+    {
+        canvasToggle.ToggleCanvasOff();
+        if (playerSpawnPoint !=null)
+        {
+            rb.isKinematic= false;
+            dead = false;
+            transform.position = playerSpawnPoint.position;
+        }
+    }
+
+    public void PlayerDeath()
+    {
+        canvasToggle.ToggleCanvasOn();
+        rb.velocity = Vector2.zero;
+        rb.isKinematic= true;
+        dead = true;
     }
 }
