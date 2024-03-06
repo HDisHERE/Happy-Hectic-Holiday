@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     public float maxSpeed;
     public float linerDrag;
 
+
     //Jump
     [Range(0f, 30f)]
     //public float jumpSpeed = 30.0f;
@@ -25,39 +26,67 @@ public class PlayerControl : MonoBehaviour
     public float jumpAdd;
     private bool isHoldingJump=false;
 
+    //Death
+    public Transform playerSpawnPoint;
+
+    CanvasHandlerScript canvasToggle;
+
+    //Determines whether player is dead or alive
+    bool dead;
+
     private Transform groundTf;
     // Start is called before the first frame update
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
+        canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
+        Respawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Here is everything about input.
-        //Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
+
+        //Here is everything about input.<<<<<<< HEAD
+        if (!dead)
+        {
+            //Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
         Inputx=Input.GetAxisRaw("Horizontal");
         isJumping = Input.GetButton("Jump");
         isHoldingJump = Input.GetButton("Jump");
 
-        if (isOnGround() && isJumping)
-        {
-            //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
-            //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
-            //drops to the ground. So I choose to use addforce for better experience.
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.AddForce(Vector2.up*jumpForce,ForceMode2D.Impulse);
+            if (isOnGround() && isJumping)
+            {
+                //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
+                //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
+                //drops to the ground. So I choose to use addforce for better experience.
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
-    }
 
+        if (Input.GetKeyDown(KeyCode.Space) && dead == true)
+        {
+            Respawn();
+            Debug.Log("Respawn attempt");
+        }
+
+    }
+        //if the player is dead, respawn them when they press space
+        
+    
+    
     private void FixedUpdate()
     {
         //Here is everything about physical calculation.
-        PosUpdate();
-        JumpUpdate();
-        linerDragUpdate();
+        if (!dead)
+        {
+            PosUpdate();
+            JumpUpdate();
+            linerDragUpdate();
+        }
+
     }
 
     private void PosUpdate()
@@ -119,5 +148,25 @@ public class PlayerControl : MonoBehaviour
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
         return Physics2D.OverlapCircle(groundTf.position, 0.02f, LayerMask.GetMask("ground"));
+    }
+    
+
+    public void Respawn()
+    {
+        canvasToggle.ToggleCanvasOff();
+        if (playerSpawnPoint !=null)
+        {
+            rb.isKinematic= false;
+            dead = false;
+            transform.position = playerSpawnPoint.position;
+        }
+    }
+
+    public void PlayerDeath()
+    {
+        canvasToggle.ToggleCanvasOn();
+        rb.velocity = Vector2.zero;
+        rb.isKinematic= true;
+        dead = true;
     }
 }
