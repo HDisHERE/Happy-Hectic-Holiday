@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour
     {
         //Here is everything about input.
         x = Input.GetAxis("Horizontal");//Get input every frame.
-        isJumping = Input.GetButtonDown("Jump");
+        isJumping = Input.GetButton("Jump");
         isHoldingJump = Input.GetButton("Jump");
 
         if (isOnGround() && isJumping)
@@ -66,9 +66,15 @@ public class PlayerControl : MonoBehaviour
 
     private void JumpUpdate()
     {
+        //Hereis the code to optimize jumping
         if(rb.velocity.y < 0) //When Falling
         {
-        
+            //The default gravity is 1.Thus here I need to decrease 1 to get the true gravity speed.
+            rb.velocity += Vector2.up* Physics2D.gravity.y*(fallAdd-1)*Time.fixedDeltaTime;
+        }
+        else if(rb.velocity.y > 0&&!isHoldingJump)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpAdd - 1) * Time.fixedDeltaTime;
         }
     }
 
