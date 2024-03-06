@@ -6,8 +6,14 @@ public class PlayerControl : MonoBehaviour
 {
     //Basic Data
     Rigidbody2D rb;
+
+    public Transform playerSpawnPoint;
+
     public float moveSpeed = 2.5f;
     public float jumpSpeed = 30.0f;
+
+    //Determines whether player is dead or alive
+    bool dead;
 
     private Transform groundTf;
     // Start is called before the first frame update
@@ -15,14 +21,20 @@ public class PlayerControl : MonoBehaviour
     {
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
+        Respawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        //if the player is dead, respawn them when they press space
+        if (Input.GetKeyDown(KeyCode.Space) && dead == true)
+        {
+            Respawn();
+        }
 
+    }
+    
     private void FixedUpdate()
     {
         PosUpdate();
@@ -49,5 +61,20 @@ public class PlayerControl : MonoBehaviour
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
         return Physics2D.OverlapCircle(groundTf.position, 0.02f, LayerMask.GetMask("ground"));
+    }
+    
+
+    public void Respawn()
+    {
+        if(playerSpawnPoint !=null)
+        {
+            dead = false;
+            transform.position = playerSpawnPoint.position;
+        }
+    }
+
+    public void PlayerDeath()
+    {
+        dead = true;
     }
 }

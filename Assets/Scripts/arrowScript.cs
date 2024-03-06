@@ -6,6 +6,8 @@ using UnityEngine;
 public class arrowScript : MonoBehaviour
 {
     Rigidbody2D rigidBody;
+    PlayerControl playerControl;
+    GameObject Player;
 
     //speed of the arrow
     float moveSpeed = 10;
@@ -14,14 +16,23 @@ public class arrowScript : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        playerControl= FindObjectOfType<PlayerControl>();
 
         //moves the arrow
         rigidBody.velocity = transform.up*moveSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //detects when the arrow comes in contact with an object, checks if it is the player, then destroys the arrow
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            playerControl.PlayerDeath();
+            Debug.Log("arrow hit player");
+        }
         Destroy(gameObject);
     }
+
+
 
 }
