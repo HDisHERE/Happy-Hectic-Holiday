@@ -113,7 +113,7 @@ public class PlayerControl : MonoBehaviour
 
     private void linerDragUpdate()
     {
-        if((Mathf.Abs(Inputx)<0.1f)&&isOnGround())
+        if((Mathf.Abs(Inputx)<0.5f)&&isOnGround()&&rb.velocity.x!=0)
         {
             rb.AddForce(new Vector2( Mathf.Sign(rb.velocity.x) * (-linerDrag),0f));
         }

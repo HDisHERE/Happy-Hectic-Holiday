@@ -648,6 +648,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1073349287199406606, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1073349287199406606, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: linerDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1073349287199406606, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: playerSpawnPoint
       value: 
       objectReference: {fileID: 1281012973}
