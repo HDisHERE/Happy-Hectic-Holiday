@@ -7,7 +7,12 @@ public class spikeTrapScript : MonoBehaviour
     PlayerControl playerControl;
     //Determines whether or not spikes are active
     bool willKill;
-    // Start is called before the first frame update
+    //how long spikes are down
+    [SerializeField] private float spikeTimeDown = 2;
+    //how long spikes are up
+    [SerializeField] private float spikeTimeUp = 2;
+    //if false, spikes are down on scene start. If true, spikes are up on scene start
+    [SerializeField] private float spikeOffset = 0;
     void Start()
     {
         playerControl = FindObjectOfType<PlayerControl>();
@@ -22,15 +27,21 @@ public class spikeTrapScript : MonoBehaviour
 
     IEnumerator SpikeTimer()
     {
+        yield return new WaitForSeconds(spikeOffset);
         while (true)
         {
-            willKill= false;
+            
+            willKill = false;
             GetComponent<Renderer>().enabled = false; //remove when given proper animation
-            yield return new WaitForSeconds(2f);
-            willKill= true;
+            yield return new WaitForSeconds(spikeTimeDown);
+            willKill = true;
             GetComponent<Renderer>().enabled = true; //remove when given proper animation
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(spikeTimeUp);
+            
+
+            
         }
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
