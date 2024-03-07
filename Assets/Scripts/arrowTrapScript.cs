@@ -5,8 +5,9 @@ using UnityEngine;
 public class arrowTrapScript : MonoBehaviour
 {
     public GameObject arrow;
-    [SerializeField] private float arrowCooldown = 2;
-    [SerializeField] private float arrowOffset = 0;
+    [SerializeField] public float arrowCooldown = 2;
+    [SerializeField] public float arrowOffset = 0;
+    public bool verticalArrow = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,17 @@ public class arrowTrapScript : MonoBehaviour
         while(true)
         {
            
-            Instantiate(arrow, transform.position, transform.rotation);
+            if(verticalArrow)
+            {
+                arrow.GetComponent<arrowScript>().isVertical = true;
+                Instantiate(arrow, transform.position, transform.rotation);
+            }
+            else
+            {
+                arrow.GetComponent<arrowScript>().isVertical = false;
+                Instantiate(arrow, transform.position, transform.rotation);
+            }
+            
             yield return new WaitForSeconds(arrowCooldown);
         
         }

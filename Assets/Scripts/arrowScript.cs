@@ -9,7 +9,8 @@ public class arrowScript : MonoBehaviour
     PlayerControl playerControl;
 
     //speed of the arrow
-    float moveSpeed = 10;
+    public float arrowSpeed = 10;
+    public bool isVertical = true;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,17 @@ public class arrowScript : MonoBehaviour
         playerControl= FindObjectOfType<PlayerControl>();
 
         //moves the arrow
-        rigidBody.velocity = transform.up*moveSpeed;
+        if(isVertical)
+        {
+            rigidBody.velocity = transform.up * arrowSpeed;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            //rigidBody.velocity = transform.right * (-arrowSpeed);
+            rigidBody.velocity = transform.up * arrowSpeed;
+        }
+        
     }
 
     //detects when the arrow comes in contact with an object, checks if it is the player, then destroys the arrow

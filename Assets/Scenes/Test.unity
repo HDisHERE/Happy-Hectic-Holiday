@@ -474,9 +474,9 @@ MonoBehaviour:
   jumpForce: 40
   fallAdd: 30
   jumpAdd: 50
-  dashForce: 20000
+  dashForce: 2000
   dashTime: 0.2
-  dashCooldown: 0
+  dashMaxspeed: 40
   playerSpawnPoint: {fileID: 0}
 --- !u!70 &55220659
 CapsuleCollider2D:
@@ -1065,11 +1065,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3369240766583668730, guid: 9f017e65cbc72664faec6469bec6aa3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.18
+      value: -4.66
       objectReference: {fileID: 0}
     - target: {fileID: 3369240766583668730, guid: 9f017e65cbc72664faec6469bec6aa3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 6.24
       objectReference: {fileID: 0}
     - target: {fileID: 3369240766583668730, guid: 9f017e65cbc72664faec6469bec6aa3a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1109,7 +1109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7294402627492382564, guid: 9f017e65cbc72664faec6469bec6aa3a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616137313976111723, guid: 9f017e65cbc72664faec6469bec6aa3a, type: 3}
+      propertyPath: verticalArrow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
