@@ -16,10 +16,11 @@ public class PlayerControl : MonoBehaviour
 
 
     //Jump
-    [Range(0f, 30f)]
+    [Range(0f, 50f)]
     //public float jumpSpeed = 30.0f;
-    public float jumpForce = 8.0f;
+    public float jumpForce = 40.0f;
     private bool isJumping=false;
+    private float rbGrav;
 
     //Better Jump
     public float fallAdd;
@@ -39,6 +40,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
+        rbGrav = rb.gravityScale;
         groundTf=transform.Find("Ground");
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
         Respawn();
@@ -48,7 +50,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
 
-        //Here is everything about input.<<<<<<< HEAD
+        //Here is everything about input.
         if (!dead)
         {
             //Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
@@ -84,7 +86,7 @@ public class PlayerControl : MonoBehaviour
         {
             PosUpdate();
             JumpUpdate();
-            linerDragUpdate();
+            linerDragUpdate();//Now the gravity is too strong.
         }
 
     }
@@ -140,14 +142,14 @@ public class PlayerControl : MonoBehaviour
         }
         else 
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = rbGrav;
         }
     }
 
     public bool isOnGround()
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
-        return Physics2D.OverlapCircle(groundTf.position, 0.02f, LayerMask.GetMask("ground"));
+        return Physics2D.OverlapCircle(groundTf.position, 0.05f, LayerMask.GetMask("ground"));
     }
     
 
