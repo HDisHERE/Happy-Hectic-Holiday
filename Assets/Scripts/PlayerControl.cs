@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     //Walk
     Rigidbody2D rb;
     //public float moveSpeed = 2.5f;
+    [Header("Player Run:")]
     public float moveForce = 2.5f;
     private float Inputx;
 
@@ -16,6 +17,7 @@ public class PlayerControl : MonoBehaviour
 
 
     //Jump
+    [Header("Player Jump:")]
     [Range(0f, 50f)]
     //public float jumpSpeed = 30.0f;
     public float jumpForce = 40.0f;
@@ -26,6 +28,14 @@ public class PlayerControl : MonoBehaviour
     public float fallAdd;
     public float jumpAdd;
     private bool isHoldingJump=false;
+
+    //Dash
+    [Header("Player Dash:")]
+    private bool canDash=true;
+    private bool isDashing=false;
+    public float dashForce = 20.0f;
+    public float dashTime = 0.2f;
+    public float dashMaxspeed = 40f;
 
     //Death
     public Transform playerSpawnPoint;
@@ -74,6 +84,11 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Respawn attempt");
         }
 
+        //Shift to dash
+        if(Input.GetKey(KeyCode.LeftShift)&&canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
         //if the player is dead, respawn them when they press space
         
@@ -170,5 +185,22 @@ public class PlayerControl : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.isKinematic= true;
         dead = true;
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+
+        float dashGravity = rb.gravityScale;
+        float normalMaxspeed = maxSpeed;
+        maxSpeed = dashMaxspeed;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x*dashForce,0f);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = dashGravity;
+        maxSpeed = normalMaxspeed;
+        isDashing = false;
+        canDash = true;
     }
 }
