@@ -41,6 +41,11 @@ public class PlayerControl : MonoBehaviour
     public Transform playerSpawnPoint;
 
     CanvasHandlerScript canvasToggle;
+    public GameObject GunPivot;
+    public GameObject Shield;
+
+    public static bool hasGrapple;
+    public static bool hasShield;
 
     //Determines whether player is dead or alive
     bool dead;
@@ -53,6 +58,15 @@ public class PlayerControl : MonoBehaviour
         rbGrav = rb.gravityScale;
         groundTf=transform.Find("Ground");
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
+        if(hasShield)
+        {
+            Shield.SetActive(true);
+        }
+        if(hasGrapple)
+        {
+            GunPivot.SetActive(true);
+        }
+
         Respawn();
     }
 
@@ -201,5 +215,16 @@ public class PlayerControl : MonoBehaviour
         maxSpeed = normalMaxspeed;
         isDashing = false;
         canDash = true;
+    }
+
+    public void EnableGrapple()
+    {
+        hasGrapple= true;
+        hasShield= false;
+    }
+    public void EnableShield()
+    {
+        hasShield= true;
+        hasGrapple= false;
     }
 }
