@@ -195,8 +195,6 @@ public class PlayerControl : MonoBehaviour
         float dashGravity = rb.gravityScale;
         float normalMaxspeed = maxSpeed;
         maxSpeed = dashMaxspeed;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x*dashForce,0f);
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = dashGravity;
         maxSpeed = normalMaxspeed;
