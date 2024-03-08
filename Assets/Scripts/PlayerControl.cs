@@ -108,10 +108,11 @@ public class PlayerControl : MonoBehaviour
 
     private void PosUpdate()
     {
+        /*
         if (Inputx != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
-        }
+        }*/
 
         //rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
         //Here I choose to change the velocity directly.

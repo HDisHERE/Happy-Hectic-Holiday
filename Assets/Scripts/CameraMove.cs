@@ -8,7 +8,7 @@ public class CameraMove : MonoBehaviour
     
     private Vector3 offset;
     
-    private float smoothing = 3f;
+    public float smoothing = 300f;
     private void Start()
     {
         
