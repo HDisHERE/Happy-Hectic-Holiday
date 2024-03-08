@@ -14,4 +14,13 @@ public class SceneLoaderScript : MonoBehaviour
         SceneManager.LoadScene(sceneTitle);
         Debug.Log("scene " + sceneTitle + " load attempt");
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        //Stop playing the scene if the application quits
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
 }
