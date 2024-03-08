@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
     public float jumpForce = 40.0f;
     private bool isJumping=false;
     private float rbGrav;
+    public float maxFallspeed;
 
     //Better Jump
     public float fallAdd;
@@ -159,6 +160,11 @@ public class PlayerControl : MonoBehaviour
         else 
         {
             rb.gravityScale = rbGrav;
+        }
+
+        if (Mathf.Abs(rb.velocity.y) > maxFallspeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxFallspeed);//Get the real time speed.
         }
     }
 
