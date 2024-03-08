@@ -65,7 +65,7 @@ public class PlayerControl : MonoBehaviour
         {
             //Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
         Inputx=Input.GetAxisRaw("Horizontal");
-        isJumping = Input.GetButton("Jump");
+        isJumping = Input.GetButtonDown("Jump");
         isHoldingJump = Input.GetButton("Jump");
 
             if (isOnGround() && isJumping)
