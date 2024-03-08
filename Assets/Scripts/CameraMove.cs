@@ -20,9 +20,14 @@ public class CameraMove : MonoBehaviour
     {
         
         Vector3 targetPosition = player.position + player.TransformDirection(offset);
-       
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothing);
-        
-        transform.LookAt(player.position);
+
+        float x = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothing).x;
+        float y = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothing).y;
+        transform.position = new Vector3(x, y, -10);
+
+
+        //transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothing);
+
+        //transform.LookAt(player.position);
     }
 }
