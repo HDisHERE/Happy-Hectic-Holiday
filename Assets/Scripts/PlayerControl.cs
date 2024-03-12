@@ -29,6 +29,7 @@ public class PlayerControl : MonoBehaviour
     public float fallAdd;
     public float jumpAdd;
     private bool isHoldingJump=false;
+    public float drag;
 
     //Dash
     [Header("Player Dash:")]
@@ -143,6 +144,7 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed.
         }
     }
+
 
     private void linerDragUpdate()
     {
