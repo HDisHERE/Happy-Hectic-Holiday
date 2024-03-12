@@ -40,7 +40,11 @@ public class arrowScript : MonoBehaviour
             playerControl.PlayerDeath();
             Debug.Log("arrow hit player");
         }
-        Destroy(gameObject);
+        if(!collision.gameObject.CompareTag("grate"))
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
 
