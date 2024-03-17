@@ -7,9 +7,9 @@ public class PlayerControl : MonoBehaviour
     //Basic Data
     //Walk
     Rigidbody2D rb;
-    //public float moveSpeed = 2.5f;
+    public float moveSpeed = 2.5f;
     [Header("Player Run:")]
-    public float moveForce = 2.5f;
+    //public float dashForce = 2.5f;
     private float Inputx;
 
     public float maxSpeed;
@@ -79,8 +79,8 @@ public class PlayerControl : MonoBehaviour
         //Here is everything about input.
         if (!dead)
         {
-            //Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
-        Inputx=Input.GetAxisRaw("Horizontal");
+        Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
+        //Inputx=Input.GetAxisRaw("Horizontal");
         isJumping = Input.GetButtonDown("Jump");
         isHoldingJump = Input.GetButton("Jump");
 
@@ -124,13 +124,13 @@ public class PlayerControl : MonoBehaviour
 
     private void PosUpdate()
     {
-        /*
+        
         if (Inputx != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
-        }*/
+        }
 
-        //rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(Inputx * moveSpeed, rb.velocity.y);
         //Here I choose to change the velocity directly.
         //Please notice that I changed the velocity directly instead of using force system. And there is a material
         //That erase all the friction on the wall to avoid bug that stick player to the wall, which means that
@@ -138,11 +138,12 @@ public class PlayerControl : MonoBehaviour
 
         //Updated: I find a way to control the friction, and I found some problems when changing the velocity directly:
         //When the player moves too fast, the player may go across the wall. So considering the trade off, I choose to use force system instead.
-        rb.AddForce(new Vector2(moveForce* Inputx, 0f),ForceMode2D.Impulse);
-        if(Mathf.Abs(rb.velocity.x)>maxSpeed)
+        
+        //rb.AddForce(new Vector2(moveForce* Inputx, 0f),ForceMode2D.Impulse);
+        /*if(Mathf.Abs(rb.velocity.x)>maxSpeed)
         {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed.
-        }
+        }*/
     }
 
 
@@ -218,6 +219,14 @@ public class PlayerControl : MonoBehaviour
         float dashGravity = rb.gravityScale;
         float normalMaxspeed = maxSpeed;
         maxSpeed = dashMaxspeed;
+
+        rb.AddForce(new Vector2(dashForce * Inputx, 0f),ForceMode2D.Impulse);
+
+        if(Mathf.Abs(rb.velocity.x)>maxSpeed)
+        {
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed.
+        }
+
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = dashGravity;
         maxSpeed = normalMaxspeed;

@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TestLevel_2.unity
     guid: 0cbbf8d7777d7554882ad349afea74f8
   - enabled: 0
-    path: Assets/Scenes/Test.unity
+    path: Assets/Scenes/TileMapTest.unity
     guid: 35aa0d0712c561449b89275c357018ba
   - enabled: 0
     path: Assets/Scenes/GameOver.unity

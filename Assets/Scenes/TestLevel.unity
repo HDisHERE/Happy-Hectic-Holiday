@@ -2845,9 +2845,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: fallAdd
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: jumpAdd
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: linerDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: moveForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: playerSpawnPoint
       value: 
       objectReference: {fileID: 832342438}
+    - target: {fileID: 7458731467504041005, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458731467504041005, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
+      propertyPath: m_GravityScale
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7980188233907667630, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.77
