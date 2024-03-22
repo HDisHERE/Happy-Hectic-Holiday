@@ -7,13 +7,15 @@ public class PlayerControl : MonoBehaviour
     //Basic Data
     //Walk
     Rigidbody2D rb;
-    public float moveSpeed = 2.5f;
-    [Header("Player Run:")]
+    public float moveSpeed = 16f;
+    [Header("Player Move:")]
     //public float dashForce = 2.5f;
     private float Inputx;
 
-    public float maxSpeed;
-    public float linerDrag;
+    //With Force system
+    //public float moveForce;
+    //public float maxSpeed;
+    //public float groundFriction;
 
 
     //Jump
@@ -28,8 +30,8 @@ public class PlayerControl : MonoBehaviour
     //Better Jump
     public float fallAdd;
     public float jumpAdd;
+    public float airFriction;
     private bool isHoldingJump=false;
-    public float drag;
 
     //Dash
     [Header("Player Dash:")]
@@ -79,11 +81,7 @@ public class PlayerControl : MonoBehaviour
         //Here is everything about input.
         if (!dead)
         {
-        Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
-        //Inputx=Input.GetAxisRaw("Horizontal");
-        isJumping = Input.GetButtonDown("Jump");
-        isHoldingJump = Input.GetButton("Jump");
-
+            getInput();
             if (isOnGround() && isJumping)
             {
                 //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
@@ -108,7 +106,13 @@ public class PlayerControl : MonoBehaviour
     }
         //if the player is dead, respawn them when they press space
         
-    
+    private void getInput()
+    {
+        Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
+        //Inputx = Input.GetAxisRaw("Horizontal");//-1,0,1//
+        isJumping = Input.GetButtonDown("Jump");
+        isHoldingJump = Input.GetButton("Jump");
+    }
     
     private void FixedUpdate()
     {
@@ -117,7 +121,7 @@ public class PlayerControl : MonoBehaviour
         {
             PosUpdate();
             JumpUpdate();
-            linerDragUpdate();//Now the gravity is too strong.
+            //linerDrageUpdate();//Works with force system
         }
 
     }
@@ -130,33 +134,42 @@ public class PlayerControl : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
         }
 
+        //Chnage velocity
         rb.velocity = new Vector2(Inputx * moveSpeed, rb.velocity.y);
         //Here I choose to change the velocity directly.
         //Please notice that I changed the velocity directly instead of using force system. And there is a material
         //That erase all the friction on the wall to avoid bug that stick player to the wall, which means that
         //FORCE SYSTEM CAN'T BE USED TO CONTROL THE MOVEMENT IN THIS PROJECT. Otherwise everything is sliding.
+        //Problem: When the character is too fast, he's easily crossing the wall.
 
         //Updated: I find a way to control the friction, and I found some problems when changing the velocity directly:
         //When the player moves too fast, the player may go across the wall. So considering the trade off, I choose to use force system instead.
         
+        //AddForce
         //rb.AddForce(new Vector2(moveForce* Inputx, 0f),ForceMode2D.Impulse);
         /*if(Mathf.Abs(rb.velocity.x)>maxSpeed)
         {
-            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed.
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed and limit speed.
         }*/
     }
 
 
-    private void linerDragUpdate()
+    private void linerDrageUpdate()
     {
         if((Mathf.Abs(Inputx)<0.5f)&&isOnGround()&&rb.velocity.x!=0)
         {
-            rb.AddForce(new Vector2( Mathf.Sign(rb.velocity.x) * (-linerDrag),0f));
+            //rb.AddForce(new Vector2( Mathf.Sign(rb.velocity.x) * (-groundFriction),0f));
+            //rb.drag = groundFriction;
+        }
+
+        else if ((Mathf.Abs(Inputx) < 0.5f) && !isOnGround() && rb.velocity.x != 0)
+        {
+            //rb.drag = airFriction;
         }
 
         else
         {
-            return;
+            //rb.drag = 0;
         }
     }
 
@@ -217,19 +230,14 @@ public class PlayerControl : MonoBehaviour
         isDashing = true;
 
         float dashGravity = rb.gravityScale;
-        float normalMaxspeed = maxSpeed;
-        maxSpeed = dashMaxspeed;
+        
 
         rb.AddForce(new Vector2(dashForce * Inputx, 0f),ForceMode2D.Impulse);
 
-        if(Mathf.Abs(rb.velocity.x)>maxSpeed)
-        {
-            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed.
-        }
+        
 
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = dashGravity;
-        maxSpeed = normalMaxspeed;
         isDashing = false;
         canDash = true;
     }
