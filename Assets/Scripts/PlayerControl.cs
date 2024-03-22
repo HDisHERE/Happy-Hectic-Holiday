@@ -24,12 +24,12 @@ public class PlayerControl : MonoBehaviour
     //public float jumpSpeed = 30.0f;
     public float jumpForce = 40.0f;
     private bool isJumping=false;
-    private float rbGrav;
     public float maxFallspeed;
 
     //Better Jump
-    public float fallAdd;
+    public float rbGrav;
     public float jumpAdd;
+    public float fallAdd;
     public float airFriction;
     private bool isHoldingJump=false;
 
@@ -59,7 +59,6 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
-        rbGrav = rb.gravityScale;
         groundTf=transform.Find("Ground");
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
         if(hasShield)
@@ -144,13 +143,18 @@ public class PlayerControl : MonoBehaviour
 
         //Updated: I find a way to control the friction, and I found some problems when changing the velocity directly:
         //When the player moves too fast, the player may go across the wall. So considering the trade off, I choose to use force system instead.
-        
+
         //AddForce
         //rb.AddForce(new Vector2(moveForce* Inputx, 0f),ForceMode2D.Impulse);
         /*if(Mathf.Abs(rb.velocity.x)>maxSpeed)
         {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed and limit speed.
         }*/
+
+        if (Mathf.Abs(rb.velocity.y) > maxFallspeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxFallspeed);//Get the real time speed and limit speed.
+        }
     }
 
 
@@ -179,7 +183,7 @@ public class PlayerControl : MonoBehaviour
         if(rb.velocity.y < 0) //When Falling
         {
             //The default gravity is 1.Thus here I need to decrease 1 to get the true gravity speed.
-            //rb.velocity += Vector2.up* Physics2D.gravity.y*(fallAdd-1)*Time.fixedDeltaTime; Change the gravity scale is much better
+            //rb.velocity += Vector2.up* Physics2D.gravity.y*(fallAdd-1)*Time.fixedDeltaTime;
             rb.gravityScale = fallAdd;
         }
         else if(rb.velocity.y > 0&&!isHoldingJump)
