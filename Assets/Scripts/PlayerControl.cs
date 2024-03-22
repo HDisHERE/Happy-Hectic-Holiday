@@ -5,12 +5,20 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     //Basic Data
+    //Animation
+    Animator ani;
+    public float xyz;
+
+
     //Walk
     Rigidbody2D rb;
-    public float moveSpeed = 16f;
     [Header("Player Move:")]
+    [Range(0f, 50f)]
+    public float moveSpeed = 16f;
     //public float dashForce = 2.5f;
     private float Inputx;
+
+    public bool isTurnRight = false;
 
     //With Force system
     //public float moveForce;
@@ -24,22 +32,29 @@ public class PlayerControl : MonoBehaviour
     //public float jumpSpeed = 30.0f;
     public float jumpForce = 40.0f;
     private bool isJumping=false;
+    [Range(0f, 40f)]
     public float maxFallspeed;
 
     //Better Jump
+    [Range(0f, 20f)]
     public float rbGrav;
+    [Range(0f, 20f)]
     public float jumpAdd;
+    [Range(0f, 20f)]
     public float fallAdd;
     public float airFriction;
     private bool isHoldingJump=false;
 
     //Dash
-    [Header("Player Dash:")]
+    /*[Header("Player Dash:")]
     private bool canDash=true;
     private bool isDashing=false;
     public float dashForce = 20.0f;
     public float dashTime = 0.2f;
-    public float dashMaxspeed = 40f;
+    public float dashMaxspeed = 40f;*/
+
+    //ItemLimit
+    public int hookCount=1;
 
     //Death
     public Transform playerSpawnPoint;
@@ -61,6 +76,8 @@ public class PlayerControl : MonoBehaviour
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
+        ani = GetComponent<Animator>();
+
         if(hasShield)
         {
             Shield.SetActive(true);
@@ -98,13 +115,33 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Shift to dash
-        if(Input.GetKey(KeyCode.LeftShift)&&canDash)
+        /*if(Input.GetKey(KeyCode.LeftShift)&&canDash)
         {
             StartCoroutine(Dash());
+        }*/
+    }
+    //if the player is dead, respawn them when they press space
+
+    private void LateUpdate()
+    {
+        if(isOnGround())
+        {
+            if(Mathf.Abs(rb.velocity.x )< 0.5)
+            {
+                ani.Play("playerIdle");
+            }
+            else
+            {
+                ani.Play("playerRun");
+            }
+        }
+
+        else
+        {
+            ani.Play("playerJump");
         }
     }
-        //if the player is dead, respawn them when they press space
-        
+
     private void getInput()
     {
         Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
@@ -127,10 +164,19 @@ public class PlayerControl : MonoBehaviour
 
     private void PosUpdate()
     {
+        xyz = rb.velocity.x;
         
         if (Inputx != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
+            if(Inputx>0)
+            {
+                isTurnRight = true;
+            }
+            else
+            {
+                isTurnRight = false;
+            }
         }
 
         //Chnage velocity
@@ -205,7 +251,7 @@ public class PlayerControl : MonoBehaviour
     public bool isOnGround()
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
-        return Physics2D.OverlapCircle(groundTf.position, 0.05f, LayerMask.GetMask("ground"));
+        return Physics2D.OverlapCircle(groundTf.position, 0.1f, LayerMask.GetMask("ground"));
     }
     
 
@@ -228,7 +274,7 @@ public class PlayerControl : MonoBehaviour
         dead = true;
     }
 
-    private IEnumerator Dash()
+    /*private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
@@ -244,7 +290,7 @@ public class PlayerControl : MonoBehaviour
         rb.gravityScale = dashGravity;
         isDashing = false;
         canDash = true;
-    }
+    }*/
 
     public void EnableGrapple()
     {
