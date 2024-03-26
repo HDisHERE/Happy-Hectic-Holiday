@@ -294,8 +294,8 @@ public class PlayerControl : MonoBehaviour
         hit= Physics2D.Raycast(transform.position + innerRaycastPos + Vector3.up * raycastLength, Vector3.right, raycastLength, groundMask);
         if (hit.collider != null)
         {
-            float newPos = hit.point.x - (transform.position.x - cornerRaycastPos.x);
-            transform.position = new Vector3(transform.position.x + newPos, transform.position.y, 0);
+            float newPos = -hit.point.x + (transform.position.x + cornerRaycastPos.x);
+            transform.position = new Vector3(transform.position.x - newPos, transform.position.y, 0);
             rb.velocity = new Vector2(rb.velocity.x, Yvelocity);
             return;
         }
