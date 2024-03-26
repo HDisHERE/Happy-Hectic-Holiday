@@ -7,8 +7,6 @@ public class PlayerControl : MonoBehaviour
     //Basic Data
     //Animation
     Animator ani;
-    public float xyz;
-
 
     //Walk
     Rigidbody2D rb;
@@ -36,6 +34,7 @@ public class PlayerControl : MonoBehaviour
     public float maxFallspeed;
 
     //Better Jump
+    [Header("Jump details:")]
     [Range(0f, 20f)]
     public float rbGrav;
     [Range(0f, 20f)]
@@ -44,6 +43,13 @@ public class PlayerControl : MonoBehaviour
     public float fallAdd;
     public float airFriction;
     private bool isHoldingJump=false;
+
+    //Jump collision refine
+    [Header("Collision refine:")]
+    public float raycastLength;
+    public Vector3 cornerRaycastPos;
+    public Vector3 innerRaycastPos;
+    public bool isCorrecting;
 
     //Dash
     /*[Header("Player Dash:")]
@@ -70,6 +76,7 @@ public class PlayerControl : MonoBehaviour
     bool dead;
 
     private Transform groundTf;
+    LayerMask groundMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +84,9 @@ public class PlayerControl : MonoBehaviour
         groundTf=transform.Find("Ground");
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
         ani = GetComponent<Animator>();
+        groundMask = LayerMask.GetMask("ground");
 
-        if(hasShield)
+        if (hasShield)
         {
             Shield.SetActive(true);
         }
@@ -122,6 +130,23 @@ public class PlayerControl : MonoBehaviour
     }
     //if the player is dead, respawn them when they press space
 
+    private void FixedUpdate()
+    {
+        //Here is everything about physical calculation.
+        if (!dead)
+        {
+            Raycastcollision();
+            PosUpdate();
+            JumpUpdate();
+            //linerDrageUpdate();//Works with force system
+            if(isCorrecting)
+            {
+                CornerCorrect(rb.velocity.y);
+            }
+        }
+
+    }
+
     private void LateUpdate()
     {
         if(isOnGround())
@@ -150,22 +175,10 @@ public class PlayerControl : MonoBehaviour
         isHoldingJump = Input.GetButton("Jump");
     }
     
-    private void FixedUpdate()
-    {
-        //Here is everything about physical calculation.
-        if (!dead)
-        {
-            PosUpdate();
-            JumpUpdate();
-            //linerDrageUpdate();//Works with force system
-        }
-
-    }
+    
 
     private void PosUpdate()
-    {
-        xyz = rb.velocity.x;
-        
+    {   
         if (Inputx != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
@@ -248,10 +261,50 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()//You can also use Debug.DrawLine() function. In that case you have to run the game to seeGizmos lines, which is better for animation.
+    {
+        Gizmos.DrawLine(transform.position + cornerRaycastPos, transform.position + cornerRaycastPos + Vector3.up*raycastLength);
+        Gizmos.DrawLine(transform.position - cornerRaycastPos, transform.position - cornerRaycastPos + Vector3.up * raycastLength);
+        Gizmos.DrawLine(transform.position + innerRaycastPos, transform.position + innerRaycastPos + Vector3.up * raycastLength);
+        Gizmos.DrawLine(transform.position - innerRaycastPos, transform.position - innerRaycastPos + Vector3.up * raycastLength);
+    }
+
+    private void Raycastcollision()
+    {
+        isCorrecting = Physics2D.Raycast(transform.position + cornerRaycastPos, Vector2.up, raycastLength, groundMask)&&
+            !Physics2D.Raycast(transform.position + innerRaycastPos, Vector2.up, raycastLength, groundMask)||
+            Physics2D.Raycast(transform.position - cornerRaycastPos, Vector2.up, raycastLength, groundMask)&&
+            !Physics2D.Raycast(transform.position - innerRaycastPos, Vector2.up, raycastLength, groundMask)
+            ;
+    }
+
+    private void CornerCorrect(float Yvelocity)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position-innerRaycastPos+Vector3.up*raycastLength,Vector3.left,raycastLength, groundMask);
+        //Cast the ray in unity and detect if it hits something.
+        //Push the player to right if it detected something.
+        if(hit.collider != null)
+        {
+            float newPos = hit.point.x - (transform.position.x - cornerRaycastPos.x);
+            transform.position = new Vector3(transform.position.x+newPos,transform.position.y,0);
+            rb.velocity = new Vector2(rb.velocity.x,Yvelocity);
+            return;
+        }
+
+        hit= Physics2D.Raycast(transform.position + innerRaycastPos + Vector3.up * raycastLength, Vector3.right, raycastLength, groundMask);
+        if (hit.collider != null)
+        {
+            float newPos = hit.point.x - (transform.position.x - cornerRaycastPos.x);
+            transform.position = new Vector3(transform.position.x + newPos, transform.position.y, 0);
+            rb.velocity = new Vector2(rb.velocity.x, Yvelocity);
+            return;
+        }
+    }
+
     public bool isOnGround()
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
-        return Physics2D.OverlapCircle(groundTf.position, 0.1f, LayerMask.GetMask("ground"));
+        return Physics2D.OverlapCircle(groundTf.position, 0.1f, groundMask);
     }
     
 
