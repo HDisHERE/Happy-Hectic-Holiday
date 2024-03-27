@@ -30,8 +30,9 @@ public class PlayerControl : MonoBehaviour
     //public float jumpSpeed = 30.0f;
     public float jumpForce = 40.0f;
     private bool isJumping=false;
-    [Range(0f, 40f)]
+    [Range(19f, 50f)]
     public float maxFallspeed;
+    public float a;
 
     //Better Jump
     [Header("Jump details:")]
@@ -41,7 +42,7 @@ public class PlayerControl : MonoBehaviour
     public float jumpAdd;
     [Range(0f, 20f)]
     public float fallAdd;
-    public float airFriction;
+    //public float airFriction;
     private bool isHoldingJump=false;
 
     //Jump collision refine
@@ -59,18 +60,25 @@ public class PlayerControl : MonoBehaviour
     public float dashTime = 0.2f;
     public float dashMaxspeed = 40f;*/
 
+    //Items
+    [Header("Items:")]
+    //GrapplingHook
+    [Header("GrapplingHook:")]
+    public bool isUsingHook;
+
     //ItemLimit
     public int hookCount=1;
-    public bool isUsingHook;
+    public static bool hasGrapple;
+    public GameObject GunPivot;
 
     //Death
     public Transform playerSpawnPoint;
 
     CanvasHandlerScript canvasToggle;
-    public GameObject GunPivot;
+    
     public GameObject Shield;
 
-    public static bool hasGrapple;
+    
     public static bool hasShield;
 
     //Determines whether player is dead or alive
@@ -102,6 +110,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        a = rb.velocity.y;
         itemUpdate();
         //Here is everything about input.
         if (!dead)
@@ -193,7 +202,7 @@ public class PlayerControl : MonoBehaviour
     {   
         if (Inputx != 0)
         {
-            //transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
+            transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
             if(Inputx>0)
             {
                 isTurnRight = true;
@@ -224,11 +233,15 @@ public class PlayerControl : MonoBehaviour
         {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);//Get the real time speed and limit speed.
         }*/
-
-        if (Mathf.Abs(rb.velocity.y) > maxFallspeed)
+        if (rb.velocity.y <= 0) //When Falling
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxFallspeed);//Get the real time speed and limit speed.
+            if (Mathf.Abs(rb.velocity.y) > maxFallspeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxFallspeed);//Get the real time speed and limit speed.
+            }
         }
+
+            
     }
 
 
@@ -368,6 +381,7 @@ public class PlayerControl : MonoBehaviour
         isDashing = false;
         canDash = true;
     }*/
+    //This is the dash code based on IEnumerator, which is not the effect I want. Maybe it's better to double press move button to dash.
 
     public void EnableGrapple()
     {

@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class SimpleCameraMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Transform player;
 
-    // Update is called once per frame
-    void Update()
+    private Vector3 offset;
+
+    public float smoothing = 300f;
+    private void Start()
     {
-        
+
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        offset = transform.position - player.position;
+    }
+    private void LateUpdate()
+    {
+
+        if(player!=null)
+        {
+            transform.position = Vector3.Lerp(transform.position,player.position+offset,smoothing);
+        }
     }
 }
