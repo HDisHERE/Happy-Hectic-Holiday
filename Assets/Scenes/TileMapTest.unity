@@ -455,11 +455,12 @@ MonoBehaviour:
   currentSpeed: 0
   runSpeed: 16
   isTurnRight: 0
-  maxWaittime: 0.5
-  dashSpeed: 30
+  maxWaittime: 0.2
+  dashSpeed: 26
   jumpForce: 19
   maxFallspeed: 24
   randomc: 0
+  jumpCount: 2
   rbGrav: 4
   jumpAdd: 8
   fallAdd: 10
@@ -467,6 +468,8 @@ MonoBehaviour:
   cornerRaycastPos: {x: 0.7, y: 0, z: 0}
   innerRaycastPos: {x: 0.25, y: 0, z: 0}
   isCorrecting: 0
+  iscrouching: 0
+  crouchSpeed: 0
   isUsingHook: 0
   hookCount: 0
   GunPivot: {fileID: 1206599684}
@@ -972,6 +975,7 @@ MonoBehaviour:
   jumpForce: 19
   maxFallspeed: 40
   randomc: 0
+  jumpCount: 2
   rbGrav: 4
   jumpAdd: 8
   fallAdd: 10
@@ -979,6 +983,8 @@ MonoBehaviour:
   cornerRaycastPos: {x: 0.7, y: 0, z: 0}
   innerRaycastPos: {x: 0.35, y: 0, z: 0}
   isCorrecting: 0
+  iscrouching: 0
+  crouchSpeed: 0
   isUsingHook: 0
   hookCount: 0
   GunPivot: {fileID: 0}

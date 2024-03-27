@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
     public float runSpeed = 16f;
     //public float dashForce = 2.5f;
     private float Inputx;
-    private float InputX;
+    private float movePress;
 
     public bool isTurnRight = false;
 
@@ -42,10 +42,15 @@ public class PlayerControl : MonoBehaviour
     [Range(0f, 50f)]
     //public float jumpSpeed = 30.0f;
     public float jumpForce = 40.0f;
-    private bool isJumping=false;
+    private bool jumpPress = false;
     [Range(19f, 50f)]
     public float maxFallspeed;
     public float randomc;
+
+    //Double jump
+    [Header("Player Double Jump:")]
+    public int jumpCount = 2;
+    private bool isJumping;
 
     //Better Jump
     [Header("Jump details:")]
@@ -64,6 +69,13 @@ public class PlayerControl : MonoBehaviour
     public Vector3 cornerRaycastPos;
     public Vector3 innerRaycastPos;
     public bool isCorrecting;
+
+
+
+    //Crouch
+    [Header("Player Crouch:")]
+    public bool iscrouching;
+    public float crouchSpeed;
 
     //Dash
     /*[Header("Player Dash:")]
@@ -128,18 +140,16 @@ public class PlayerControl : MonoBehaviour
     {
         itemUpdate();
         DashCheck();
+        if (jumpCount > 0 && jumpPress)
+        {
+
+            isJumping = true;
+        }
+
         //Here is everything about input.
         if (!dead)
         {
             getInput();
-            if (isOnGround() && isJumping)
-            {
-                //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
-                //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
-                //drops to the ground. So I choose to use addforce for better experience.
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && dead == true)
@@ -165,7 +175,7 @@ public class PlayerControl : MonoBehaviour
             PosUpdate();
             JumpUpdate();
             //linerDrageUpdate();//Works with force system
-            if(isCorrecting)
+            if (isCorrecting)
             {
                 CornerCorrect(rb.velocity.y);
             }
@@ -196,8 +206,8 @@ public class PlayerControl : MonoBehaviour
     private void getInput()
     {
         Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
-        InputX = Input.GetAxisRaw("Horizontal");//-1,0,1//
-        isJumping = Input.GetButtonDown("Jump");
+        movePress = Input.GetAxisRaw("Horizontal");//-1,0,1//
+        jumpPress = Input.GetButtonDown("Jump");
         isHoldingJump = Input.GetButton("Jump");
     }
     
@@ -281,7 +291,7 @@ public class PlayerControl : MonoBehaviour
             leftPresstime = Time.time;
         }
 
-        if (MathF.Abs(InputX)==1)
+        if (MathF.Abs(movePress) ==1)
         {
             isRunning = true;
             if (canDash)
@@ -306,6 +316,10 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void CrouchUpdate()
+    {
+        //if(isOnGround()&&Input.GetButton)
+    }
 
     private void linerDrageUpdate()
     {
@@ -330,6 +344,22 @@ public class PlayerControl : MonoBehaviour
     {
         if(!isUsingHook)
         {
+            if(isOnGround())
+            {
+                jumpCount = 2;
+            }
+            //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
+            //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
+            //drops to the ground. So I choose to use addforce for better experience.
+            if(isJumping)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                jumpCount--;
+                isJumping = false;
+            }
+            
+
             //Hereis the code to optimize jumping
             if (rb.velocity.y <= 0) //When Falling
             {
