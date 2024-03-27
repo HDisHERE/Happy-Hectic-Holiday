@@ -108,6 +108,7 @@ public class PlayerControl : MonoBehaviour
 
     private Transform groundTf;
     LayerMask groundMask;
+    private PlayerLife playerLife;
 
     //sound
     public AudioClip jumpSound;
@@ -127,6 +128,8 @@ public class PlayerControl : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
+        playerLife= GetComponent<PlayerLife>();
+
 
         currentSpeed = runSpeed;
 
@@ -145,6 +148,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         itemUpdate();
 
         if(DoublePress)
@@ -164,8 +168,10 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Here is everything about input.
-        
-        getInput();
+        if(!playerLife.dead)
+        {
+            getInput();
+        }
 
 
             if (isOnGround() && isJumping)
@@ -202,10 +208,12 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         //Here is everything about physical calculation.
-        
+        if (!playerLife.dead)
+        {
             Raycastcollision();
             PosUpdate();
             JumpUpdate();
+        }
             //linerDrageUpdate();//Works with force system
             if (isCorrecting)
             {
