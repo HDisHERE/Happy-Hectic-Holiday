@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6450077660471419946}
   - component: {fileID: 9112346693002436974}
   - component: {fileID: 8783956233028267781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FadingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

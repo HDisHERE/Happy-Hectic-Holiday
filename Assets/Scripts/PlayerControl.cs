@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour
     Animator ani;
 
     //Run
+ 
     Rigidbody2D rb;
     [Header("Player Run:")]
     [Range(0f, 50f)]
@@ -107,6 +108,12 @@ public class PlayerControl : MonoBehaviour
 
     private Transform groundTf;
     LayerMask groundMask;
+
+    //sound
+    public AudioClip jumpSound;
+    public AudioClip landSound;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,7 +124,12 @@ public class PlayerControl : MonoBehaviour
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
 
+
+        audioSource = GetComponent<AudioSource>();
+
+
         currentSpeed = runSpeed;
+
 
         if (hasShield)
         {
@@ -134,6 +146,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         itemUpdate();
+
         if(DoublePress)
         {
             DashCheck();
@@ -152,9 +165,17 @@ public class PlayerControl : MonoBehaviour
 
         //Here is everything about input.
         
-            getInput();
+        getInput();
 
-        
+
+            if (isOnGround() && isJumping)
+            {
+                //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
+                //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
+                //drops to the ground. So I choose to use addforce for better experience.
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
 
         //Shift to dash
         /*if(Input.GetKey(KeyCode.LeftShift)&&canDash)
@@ -162,7 +183,21 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(Dash());
         }*/
     }
+
+
+
+
+
     //if the player is dead, respawn them when they press space
+
+    //play landing sound effect
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 6)
+        {
+            audioSource.PlayOneShot(landSound);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -192,6 +227,7 @@ public class PlayerControl : MonoBehaviour
             {
                 ani.Play("playerRun");
             }
+            
         }
 
         else
@@ -373,6 +409,7 @@ public class PlayerControl : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 jumpCount--;
+                audioSource.PlayOneShot(jumpSound);
                 isJumping = false;
             }
             
@@ -484,4 +521,5 @@ public class PlayerControl : MonoBehaviour
         hasShield= true;
         hasGrapple= false;
     }
+
 }

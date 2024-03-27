@@ -7,7 +7,11 @@ TagManager:
   - Coin
   - grate
   - checkpoint
+<<<<<<< HEAD
   - trap
+=======
+  - MovingPlatform
+>>>>>>> 1b96ccf38d991c4f1039e12d0a1320fe298128c0
   layers:
   - Default
   - TransparentFX

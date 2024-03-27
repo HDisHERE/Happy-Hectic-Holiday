@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD:Assets/Prefabs/MovingPlatform(vertical).prefab
   - component: {fileID: 7293132037619733223}
   - component: {fileID: 582266637566362560}
   - component: {fileID: 6202524160318272915}
@@ -15,6 +16,14 @@ GameObject:
   - component: {fileID: 4734163756730738066}
   m_Layer: 6
   m_Name: MovingPlatform(vertical)
+=======
+  - component: {fileID: 4312217760978709211}
+  - component: {fileID: 3927277507225034309}
+  - component: {fileID: 3115777165146428316}
+  - component: {fileID: 7103917848175570948}
+  m_Layer: 6
+  m_Name: MovingPlatformVertical
+>>>>>>> 1b96ccf38d991c4f1039e12d0a1320fe298128c0:Assets/Prefabs/MovingPlatformVertical.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
