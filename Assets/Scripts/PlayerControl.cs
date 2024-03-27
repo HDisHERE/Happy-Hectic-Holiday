@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     //Animation
     Animator ani;
 
+
     //Walk
     Rigidbody2D rb;
     [Header("Player Move:")]
@@ -86,6 +87,12 @@ public class PlayerControl : MonoBehaviour
 
     private Transform groundTf;
     LayerMask groundMask;
+
+    //sound
+    public AudioClip jumpSound;
+    public AudioClip landSound;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +101,9 @@ public class PlayerControl : MonoBehaviour
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
+
+        audioSource = GetComponent<AudioSource>();
+
 
         if (hasShield)
         {
@@ -123,7 +133,9 @@ public class PlayerControl : MonoBehaviour
                 //drops to the ground. So I choose to use addforce for better experience.
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                audioSource.PlayOneShot(jumpSound);
             }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && dead == true)
@@ -139,6 +151,15 @@ public class PlayerControl : MonoBehaviour
         }*/
     }
     //if the player is dead, respawn them when they press space
+
+    //play landing sound effect
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 6)
+        {
+            audioSource.PlayOneShot(landSound);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -169,6 +190,7 @@ public class PlayerControl : MonoBehaviour
             {
                 ani.Play("playerRun");
             }
+            
         }
 
         else
@@ -393,4 +415,5 @@ public class PlayerControl : MonoBehaviour
         hasShield= true;
         hasGrapple= false;
     }
+
 }
