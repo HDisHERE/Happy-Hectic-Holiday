@@ -396,17 +396,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d7987b718a43f45a97b112da71aaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 5
-  maxSpeed: 16
-  linerDrag: -30
+  currentSpeed: 0
+  runSpeed: 16
+  isTurnRight: 0
+  DoublePress: 0
+  maxWaittime: 0
+  dashSpeed: 0
   jumpForce: 40
   maxFallspeed: 50
-  fallAdd: 30
-  jumpAdd: 50
-  dashForce: 2000
-  dashTime: 0.2
-  dashMaxspeed: 40
-  playerSpawnPoint: {fileID: 0}
+  randomc: 0
+  jumpCount: 2
+  rbGrav: 0
+  jumpAdd: 20
+  fallAdd: 20
+  raycastLength: 0
+  cornerRaycastPos: {x: 0, y: 0, z: 0}
+  innerRaycastPos: {x: 0, y: 0, z: 0}
+  isCorrecting: 0
+  iscrouching: 0
+  crouchSpeed: 0
+  isUsingHook: 0
+  hookCount: 1
   GunPivot: {fileID: 9066309249283444928}
   Shield: {fileID: 8443416779945275950}
 --- !u!114 &502095837637185356
@@ -421,6 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93442d7a4dad1274596be6918b033753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinNum: 0
 --- !u!114 &4814222240688245715
 MonoBehaviour:
   m_ObjectHideFlags: 0

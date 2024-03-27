@@ -29,13 +29,14 @@ public class PlayerControl : MonoBehaviour
 
     //Dash
     [Header("Player Dash:")]
+    //Double press to dash
+    public bool DoublePress;
     private float leftPresstime;
     private float rightPresstime;
     public float maxWaittime;
     private bool canDash;
     private bool isDashing;
     public float dashSpeed;
-
 
     //Jump
     [Header("Player Jump:")]
@@ -96,18 +97,13 @@ public class PlayerControl : MonoBehaviour
     public static bool hasGrapple;
     public GameObject GunPivot;
 
-    //Death
-    public Transform playerSpawnPoint;
-
-    CanvasHandlerScript canvasToggle;
-    
     public GameObject Shield;
 
-    
+
     public static bool hasShield;
 
-    //Determines whether player is dead or alive
-    bool dead;
+    //Death
+
 
     private Transform groundTf;
     LayerMask groundMask;
@@ -117,7 +113,7 @@ public class PlayerControl : MonoBehaviour
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
         leftPresstime = rightPresstime = -maxWaittime;
-        canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
+        
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
 
@@ -132,14 +128,22 @@ public class PlayerControl : MonoBehaviour
             GunPivot.SetActive(true);
         }
 
-        Respawn();
     }
 
     // Update is called once per frame
     void Update()
     {
         itemUpdate();
-        DashCheck();
+        if(DoublePress)
+        {
+            DashCheck();
+        }
+        else
+        {
+            originDashcheck();
+        }
+
+        
         if (jumpCount > 0 && jumpPress)
         {
 
@@ -147,16 +151,10 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Here is everything about input.
-        if (!dead)
-        {
+        
             getInput();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && dead == true)
-        {
-            Respawn();
-            Debug.Log("Respawn attempt");
-        }
+        
 
         //Shift to dash
         /*if(Input.GetKey(KeyCode.LeftShift)&&canDash)
@@ -169,8 +167,7 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         //Here is everything about physical calculation.
-        if (!dead)
-        {
+        
             Raycastcollision();
             PosUpdate();
             JumpUpdate();
@@ -179,7 +176,7 @@ public class PlayerControl : MonoBehaviour
             {
                 CornerCorrect(rb.velocity.y);
             }
-        }
+        
 
     }
 
@@ -316,6 +313,26 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void originDashcheck()
+    {
+        if(MathF.Abs(Inputx) > 0)
+        {
+            isRunning=true;
+            currentSpeed = runSpeed;
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                isDashing = true;
+                currentSpeed = dashSpeed;
+            }
+            else
+            {
+                isDashing=false;
+                currentSpeed = runSpeed;
+            }
+        }
+            
+    }
+
     private void CrouchUpdate()
     {
         //if(isOnGround()&&Input.GetButton)
@@ -436,25 +453,6 @@ public class PlayerControl : MonoBehaviour
         return Physics2D.OverlapCircle(groundTf.position, 0.1f, groundMask);
     }
     
-
-    public void Respawn()
-    {
-        canvasToggle.ToggleCanvasOff();
-        if (playerSpawnPoint !=null)
-        {
-            rb.isKinematic= false;
-            dead = false;
-            transform.position = playerSpawnPoint.position;
-        }
-    }
-
-    public void PlayerDeath()
-    {
-        canvasToggle.ToggleCanvasOn();
-        rb.velocity = Vector2.zero;
-        rb.isKinematic= true;
-        dead = true;
-    }
 
     /*private IEnumerator Dash()
     {

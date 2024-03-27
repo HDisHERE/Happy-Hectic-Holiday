@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class spikeTrapScript : MonoBehaviour
 {
-    PlayerControl playerControl;
+    PlayerLife PlayerLife;
     //Determines whether or not spikes are active
     bool willKill;
     //how long spikes are down
@@ -15,7 +15,7 @@ public class spikeTrapScript : MonoBehaviour
     [SerializeField] private float spikeOffset = 0;
     void Start()
     {
-        playerControl = FindObjectOfType<PlayerControl>();
+        PlayerLife = FindObjectOfType<PlayerLife>();
         StartCoroutine(SpikeTimer());
     }
 
@@ -48,7 +48,7 @@ public class spikeTrapScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && willKill == true)
         {
-            playerControl.PlayerDeath();
+            PlayerLife.PlayerDeath();
         }
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class checkpointScript : MonoBehaviour
 {
 
-    PlayerControl playerControl;
+    PlayerLife PlayerLife;
     // Start is called before the first frame update
     void Start()
     {
-        playerControl = FindObjectOfType<PlayerControl>();
+        PlayerLife = FindObjectOfType<PlayerLife>();
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class checkpointScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")) 
         {
-            playerControl.playerSpawnPoint = this.gameObject.transform;
+            PlayerLife.playerSpawnPoint = this.gameObject.transform;
         }
     }
 }

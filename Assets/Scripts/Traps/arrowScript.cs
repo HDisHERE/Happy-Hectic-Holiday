@@ -6,7 +6,7 @@ using UnityEngine;
 public class arrowScript : MonoBehaviour
 {
     Rigidbody2D rigidBody;
-    PlayerControl playerControl;
+    PlayerLife PlayerLife;
 
     //speed of the arrow
     public float arrowSpeed = 10;
@@ -16,7 +16,7 @@ public class arrowScript : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        playerControl= FindObjectOfType<PlayerControl>();
+        PlayerLife = FindObjectOfType<PlayerLife>();
 
         //moves the arrow
         if(isVertical)
@@ -37,7 +37,7 @@ public class arrowScript : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            playerControl.PlayerDeath();
+            PlayerLife.PlayerDeath();
             Debug.Log("arrow hit player");
         }
         if(!collision.gameObject.CompareTag("grate"))

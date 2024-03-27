@@ -45,6 +45,20 @@ public class MovingPlatformScript : MonoBehaviour
         isWaiting = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.transform.SetParent(transform);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.transform.SetParent(null);
+        }
+    }
     private void CalculateDestination()
     {
         destPos = startPos + Vector2.right * distance * direction;
