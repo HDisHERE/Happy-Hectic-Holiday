@@ -8,18 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 6775877524061796700}
   - component: {fileID: 4583970670151205500}
   - component: {fileID: 520575070389712550}
   - component: {fileID: 7351762307737089408}
   - component: {fileID: 8423752206931526666}
-=======
-  - component: {fileID: 1036011561667058614}
-  - component: {fileID: 3718360152903432163}
-  - component: {fileID: 4005230498410304453}
-  - component: {fileID: 870230654965742053}
->>>>>>> 1b96ccf38d991c4f1039e12d0a1320fe298128c0
   m_Layer: 6
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -36,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1622100531369301387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.386244, y: -7.1367903, z: 0}
+  m_LocalPosition: {x: 18.359932, y: -7.26098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

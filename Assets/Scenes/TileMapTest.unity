@@ -773,6 +773,8 @@ MonoBehaviour:
   hookCount: 0
   GunPivot: {fileID: 0}
   Shield: {fileID: 0}
+  jumpSound: {fileID: 0}
+  landSound: {fileID: 0}
 --- !u!70 &905538193
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
