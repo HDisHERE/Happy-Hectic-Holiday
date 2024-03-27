@@ -150,8 +150,8 @@ Transform:
   m_GameObject: {fileID: 34889699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.82, y: 0, z: 0}
-  m_LocalScale: {x: 0.29, y: 0.21090908, z: 0.5272727}
+  m_LocalPosition: {x: 0.66, y: 0, z: 0}
+  m_LocalScale: {x: 0.19, y: 0.1381818, z: 0.3454545}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1050426293}
@@ -403,6 +403,7 @@ Transform:
   m_Children:
   - {fileID: 1995800839}
   - {fileID: 1066221762}
+  - {fileID: 1206599685}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &178288611
@@ -7792,7 +7793,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1206599685}
-  - component: {fileID: 1206599686}
   m_Layer: 0
   m_Name: GunPivot
   m_TagString: Untagged
@@ -7809,40 +7809,13 @@ Transform:
   m_GameObject: {fileID: 1206599684}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.27, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0.8000002, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 34889700}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 178288610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1773428102 &1206599686
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206599684}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_TranslationAtRest: {x: -13.27, y: 1.5, z: 0}
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_RotationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 1
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 178288610}
-    weight: 1
 --- !u!1 &1243255335
 GameObject:
   m_ObjectHideFlags: 0
@@ -10859,7 +10832,6 @@ SceneRoots:
   - {fileID: 1099083325}
   - {fileID: 1806274292}
   - {fileID: 178288610}
-  - {fileID: 1206599685}
   - {fileID: 905538195}
   - {fileID: 1672527783}
   - {fileID: 106764577}
