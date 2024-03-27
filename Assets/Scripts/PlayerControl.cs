@@ -174,7 +174,6 @@ public class PlayerControl : MonoBehaviour
                 //drops to the ground. So I choose to use addforce for better experience.
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                audioSource.PlayOneShot(jumpSound);
             }
             
 
@@ -394,6 +393,7 @@ public class PlayerControl : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 jumpCount--;
+                audioSource.PlayOneShot(jumpSound);
                 isJumping = false;
             }
             
