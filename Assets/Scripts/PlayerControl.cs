@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,20 @@ public class PlayerControl : MonoBehaviour
     Animator ani;
 
 
-    //Walk
+
+    
+
+    //Run
+ 
     Rigidbody2D rb;
-    [Header("Player Move:")]
+    [Header("Player Run:")]
     [Range(0f, 50f)]
-    public float moveSpeed = 16f;
+    private bool isRunning;
+    public float currentSpeed;
+    public float runSpeed = 16f;
     //public float dashForce = 2.5f;
     private float Inputx;
+    private float movePress;
 
     public bool isTurnRight = false;
 
@@ -24,16 +32,30 @@ public class PlayerControl : MonoBehaviour
     //public float maxSpeed;
     //public float groundFriction;
 
+    //Dash
+    [Header("Player Dash:")]
+    private float leftPresstime;
+    private float rightPresstime;
+    public float maxWaittime;
+    private bool canDash;
+    private bool isDashing;
+    public float dashSpeed;
+
 
     //Jump
     [Header("Player Jump:")]
     [Range(0f, 50f)]
     //public float jumpSpeed = 30.0f;
     public float jumpForce = 40.0f;
-    private bool isJumping=false;
+    private bool jumpPress = false;
     [Range(19f, 50f)]
     public float maxFallspeed;
-    public float a;
+    public float randomc;
+
+    //Double jump
+    [Header("Player Double Jump:")]
+    public int jumpCount = 2;
+    private bool isJumping;
 
     //Better Jump
     [Header("Jump details:")]
@@ -52,6 +74,13 @@ public class PlayerControl : MonoBehaviour
     public Vector3 cornerRaycastPos;
     public Vector3 innerRaycastPos;
     public bool isCorrecting;
+
+
+
+    //Crouch
+    [Header("Player Crouch:")]
+    public bool iscrouching;
+    public float crouchSpeed;
 
     //Dash
     /*[Header("Player Dash:")]
@@ -98,11 +127,16 @@ public class PlayerControl : MonoBehaviour
     {
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
+        leftPresstime = rightPresstime = -maxWaittime;
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
 
+
         audioSource = GetComponent<AudioSource>();
+
+
+        currentSpeed = runSpeed;
 
 
         if (hasShield)
@@ -120,12 +154,19 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        a = rb.velocity.y;
         itemUpdate();
+        DashCheck();
+        if (jumpCount > 0 && jumpPress)
+        {
+
+            isJumping = true;
+        }
+
         //Here is everything about input.
         if (!dead)
         {
             getInput();
+
             if (isOnGround() && isJumping)
             {
                 //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
@@ -136,6 +177,7 @@ public class PlayerControl : MonoBehaviour
                 audioSource.PlayOneShot(jumpSound);
             }
             
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && dead == true)
@@ -170,7 +212,7 @@ public class PlayerControl : MonoBehaviour
             PosUpdate();
             JumpUpdate();
             //linerDrageUpdate();//Works with force system
-            if(isCorrecting)
+            if (isCorrecting)
             {
                 CornerCorrect(rb.velocity.y);
             }
@@ -202,8 +244,8 @@ public class PlayerControl : MonoBehaviour
     private void getInput()
     {
         Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
-        //Inputx = Input.GetAxisRaw("Horizontal");//-1,0,1//
-        isJumping = Input.GetButtonDown("Jump");
+        movePress = Input.GetAxisRaw("Horizontal");//-1,0,1//
+        jumpPress = Input.GetButtonDown("Jump");
         isHoldingJump = Input.GetButton("Jump");
     }
     
@@ -235,10 +277,10 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        //Chnage velocity
+        //Change velocity
         if(!isUsingHook)
         {
-            rb.velocity = new Vector2(Inputx * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(Inputx * currentSpeed, rb.velocity.y);
         }
         //Here I choose to change the velocity directly.
         //Please notice that I changed the velocity directly instead of using force system. And there is a material
@@ -266,6 +308,56 @@ public class PlayerControl : MonoBehaviour
             
     }
 
+    private void DashCheck()
+    {
+        if (Inputx > 0&&!isRunning)
+        {
+            if (Time.time - rightPresstime <= maxWaittime)
+            {
+                randomc = Time.deltaTime - rightPresstime;
+                canDash = true;
+            }
+            rightPresstime = Time.time;
+        }
+
+        else if (Inputx < 0 && !isRunning)
+        {
+            if (Time.time - leftPresstime <= maxWaittime)
+            {
+                canDash = true;
+            }
+            leftPresstime = Time.time;
+        }
+
+        if (MathF.Abs(movePress) ==1)
+        {
+            isRunning = true;
+            if (canDash)
+            {
+                currentSpeed=dashSpeed;
+                isDashing = true;
+            }
+
+            else
+            {
+                currentSpeed = runSpeed;
+                isDashing = false;
+            }
+        }
+
+        else
+        {
+            isRunning = false;
+            isDashing = false;
+            canDash=false;
+            currentSpeed = runSpeed;
+        }
+    }
+
+    private void CrouchUpdate()
+    {
+        //if(isOnGround()&&Input.GetButton)
+    }
 
     private void linerDrageUpdate()
     {
@@ -290,6 +382,22 @@ public class PlayerControl : MonoBehaviour
     {
         if(!isUsingHook)
         {
+            if(isOnGround())
+            {
+                jumpCount = 2;
+            }
+            //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
+            //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
+            //drops to the ground. So I choose to use addforce for better experience.
+            if(isJumping)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                jumpCount--;
+                isJumping = false;
+            }
+            
+
             //Hereis the code to optimize jumping
             if (rb.velocity.y <= 0) //When Falling
             {
@@ -405,6 +513,7 @@ public class PlayerControl : MonoBehaviour
     }*/
     //This is the dash code based on IEnumerator, which is not the effect I want. Maybe it's better to double press move button to dash.
 
+    
     public void EnableGrapple()
     {
         hasGrapple= true;
