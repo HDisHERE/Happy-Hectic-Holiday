@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &34889700
 Transform:
   m_ObjectHideFlags: 0
@@ -150,8 +150,8 @@ Transform:
   m_GameObject: {fileID: 34889699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 0, z: 0}
-  m_LocalScale: {x: 0.19, y: 0.1381818, z: 0.3454545}
+  m_LocalPosition: {x: 0.97, y: 0, z: 0}
+  m_LocalScale: {x: 0.08, y: 0.058181815, z: 0.14545453}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1050426293}
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_rigidbody: {fileID: 178288613}
   rotateOverTime: 1
   rotationSpeed: 14.5
-  hasMaxDistance: 0
-  maxDistnace: 5
+  hasMaxDistance: 1
+  maxDistnace: 14
   launchToPoint: 1
   launchType: 1
   launchSpeed: 2.54
@@ -323,9 +323,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 178288610}
+  - component: {fileID: 178288612}
   - component: {fileID: 178288609}
   - component: {fileID: 178288611}
-  - component: {fileID: 178288612}
   - component: {fileID: 178288613}
   - component: {fileID: 178288614}
   - component: {fileID: 178288615}
@@ -403,7 +403,6 @@ Transform:
   m_Children:
   - {fileID: 1995800839}
   - {fileID: 1066221762}
-  - {fileID: 1206599685}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &178288611
@@ -453,11 +452,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d7987b718a43f45a97b112da71aaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
+  currentSpeed: 0
+  runSpeed: 16
   isTurnRight: 0
+  maxWaittime: 0.5
+  dashSpeed: 30
   jumpForce: 19
   maxFallspeed: 24
-  a: 0
+  randomc: 0
   rbGrav: 4
   jumpAdd: 8
   fallAdd: 10
@@ -504,7 +506,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178288608}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
@@ -962,11 +964,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d7987b718a43f45a97b112da71aaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
+  currentSpeed: 0
+  runSpeed: 16
   isTurnRight: 0
+  maxWaittime: 0
+  dashSpeed: 0
   jumpForce: 19
   maxFallspeed: 40
-  a: 0
+  randomc: 0
   rbGrav: 4
   jumpAdd: 8
   fallAdd: 10
@@ -7793,6 +7798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1206599685}
+  - component: {fileID: 1206599686}
   m_Layer: 0
   m_Name: GunPivot
   m_TagString: Untagged
@@ -7809,13 +7815,40 @@ Transform:
   m_GameObject: {fileID: 1206599684}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8000002, y: 0, z: 0}
+  m_LocalPosition: {x: -13.27, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 34889700}
-  m_Father: {fileID: 178288610}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1773428102 &1206599686
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206599684}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: -13.27, y: 1.5, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 0
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 178288610}
+    weight: 1
 --- !u!1 &1243255335
 GameObject:
   m_ObjectHideFlags: 0
@@ -10721,7 +10754,7 @@ Transform:
   m_GameObject: {fileID: 1995800838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.239913, y: 3.5860167, z: 0.17417003}
+  m_LocalPosition: {x: 1.239913, y: -0.13, z: 0.17417003}
   m_LocalScale: {x: 0.27219597, y: 1.1194086, z: 0.6784295}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10832,6 +10865,7 @@ SceneRoots:
   - {fileID: 1099083325}
   - {fileID: 1806274292}
   - {fileID: 178288610}
+  - {fileID: 1206599685}
   - {fileID: 905538195}
   - {fileID: 1672527783}
   - {fileID: 106764577}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,16 @@ public class PlayerControl : MonoBehaviour
     //Animation
     Animator ani;
 
-    //Walk
+    //Run
     Rigidbody2D rb;
-    [Header("Player Move:")]
+    [Header("Player Run:")]
     [Range(0f, 50f)]
-    public float moveSpeed = 16f;
+    private bool isRunning;
+    public float currentSpeed;
+    public float runSpeed = 16f;
     //public float dashForce = 2.5f;
     private float Inputx;
+    private float InputX;
 
     public bool isTurnRight = false;
 
@@ -22,6 +26,15 @@ public class PlayerControl : MonoBehaviour
     //public float moveForce;
     //public float maxSpeed;
     //public float groundFriction;
+
+    //Dash
+    [Header("Player Dash:")]
+    private float leftPresstime;
+    private float rightPresstime;
+    public float maxWaittime;
+    private bool canDash;
+    private bool isDashing;
+    public float dashSpeed;
 
 
     //Jump
@@ -32,7 +45,7 @@ public class PlayerControl : MonoBehaviour
     private bool isJumping=false;
     [Range(19f, 50f)]
     public float maxFallspeed;
-    public float a;
+    public float randomc;
 
     //Better Jump
     [Header("Jump details:")]
@@ -91,9 +104,12 @@ public class PlayerControl : MonoBehaviour
     {
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
+        leftPresstime = rightPresstime = -maxWaittime;
         canvasToggle=GetComponentInChildren<CanvasHandlerScript>();
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
+
+        currentSpeed = runSpeed;
 
         if (hasShield)
         {
@@ -110,8 +126,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        a = rb.velocity.y;
         itemUpdate();
+        DashCheck();
         //Here is everything about input.
         if (!dead)
         {
@@ -180,7 +196,7 @@ public class PlayerControl : MonoBehaviour
     private void getInput()
     {
         Inputx = Input.GetAxis("Horizontal");//-1~1//Get input every frame.
-        //Inputx = Input.GetAxisRaw("Horizontal");//-1,0,1//
+        InputX = Input.GetAxisRaw("Horizontal");//-1,0,1//
         isJumping = Input.GetButtonDown("Jump");
         isHoldingJump = Input.GetButton("Jump");
     }
@@ -213,10 +229,10 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        //Chnage velocity
+        //Change velocity
         if(!isUsingHook)
         {
-            rb.velocity = new Vector2(Inputx * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(Inputx * currentSpeed, rb.velocity.y);
         }
         //Here I choose to change the velocity directly.
         //Please notice that I changed the velocity directly instead of using force system. And there is a material
@@ -242,6 +258,52 @@ public class PlayerControl : MonoBehaviour
         }
 
             
+    }
+
+    private void DashCheck()
+    {
+        if (Inputx > 0&&!isRunning)
+        {
+            if (Time.time - rightPresstime <= maxWaittime)
+            {
+                randomc = Time.deltaTime - rightPresstime;
+                canDash = true;
+            }
+            rightPresstime = Time.time;
+        }
+
+        else if (Inputx < 0 && !isRunning)
+        {
+            if (Time.time - leftPresstime <= maxWaittime)
+            {
+                canDash = true;
+            }
+            leftPresstime = Time.time;
+        }
+
+        if (MathF.Abs(InputX)==1)
+        {
+            isRunning = true;
+            if (canDash)
+            {
+                currentSpeed=dashSpeed;
+                isDashing = true;
+            }
+
+            else
+            {
+                currentSpeed = runSpeed;
+                isDashing = false;
+            }
+        }
+
+        else
+        {
+            isRunning = false;
+            isDashing = false;
+            canDash=false;
+            currentSpeed = runSpeed;
+        }
     }
 
 
@@ -383,6 +445,7 @@ public class PlayerControl : MonoBehaviour
     }*/
     //This is the dash code based on IEnumerator, which is not the effect I want. Maybe it's better to double press move button to dash.
 
+    
     public void EnableGrapple()
     {
         hasGrapple= true;
