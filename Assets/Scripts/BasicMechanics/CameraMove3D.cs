@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class CameraMove : MonoBehaviour
+public class CameraMove3D : MonoBehaviour
 {
     
     public Transform player;

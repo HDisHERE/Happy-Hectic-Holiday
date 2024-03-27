@@ -61,6 +61,7 @@ public class PlayerControl : MonoBehaviour
 
     //ItemLimit
     public int hookCount=1;
+    public bool isUsingHook;
 
     //Death
     public Transform playerSpawnPoint;
@@ -101,7 +102,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        itemUpdate();
         //Here is everything about input.
         if (!dead)
         {
@@ -175,13 +176,24 @@ public class PlayerControl : MonoBehaviour
         isHoldingJump = Input.GetButton("Jump");
     }
     
-    
+    private void itemUpdate()
+    {
+        if(Input.GetKey(KeyCode.Mouse0))
+        {
+            isUsingHook = true;
+        }
+
+        else
+        {
+            isUsingHook = false;
+        }    
+    }
 
     private void PosUpdate()
     {   
         if (Inputx != 0)
         {
-            transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
+            //transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
             if(Inputx>0)
             {
                 isTurnRight = true;
@@ -193,7 +205,10 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Chnage velocity
-        rb.velocity = new Vector2(Inputx * moveSpeed, rb.velocity.y);
+        if(!isUsingHook)
+        {
+            rb.velocity = new Vector2(Inputx * moveSpeed, rb.velocity.y);
+        }
         //Here I choose to change the velocity directly.
         //Please notice that I changed the velocity directly instead of using force system. And there is a material
         //That erase all the friction on the wall to avoid bug that stick player to the wall, which means that
@@ -238,19 +253,27 @@ public class PlayerControl : MonoBehaviour
 
     private void JumpUpdate()
     {
-        //Hereis the code to optimize jumping
-        if(rb.velocity.y < 0) //When Falling
+        if(!isUsingHook)
         {
-            //The default gravity is 1.Thus here I need to decrease 1 to get the true gravity speed.
-            //rb.velocity += Vector2.up* Physics2D.gravity.y*(fallAdd-1)*Time.fixedDeltaTime;
-            rb.gravityScale = fallAdd;
+            //Hereis the code to optimize jumping
+            if (rb.velocity.y <= 0) //When Falling
+            {
+                //The default gravity is 1.Thus here I need to decrease 1 to get the true gravity speed.
+                //rb.velocity += Vector2.up* Physics2D.gravity.y*(fallAdd-1)*Time.fixedDeltaTime;
+                rb.gravityScale = fallAdd;
+            }
+            else if (rb.velocity.y > 0 && !isHoldingJump)
+            {
+                //rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpAdd - 1) * Time.fixedDeltaTime;
+                rb.gravityScale = jumpAdd;
+            }
+            else
+            {
+                rb.gravityScale = rbGrav;
+            }
         }
-        else if(rb.velocity.y > 0&&!isHoldingJump)
-        {
-            //rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpAdd - 1) * Time.fixedDeltaTime;
-            rb.gravityScale = jumpAdd;
-        }
-        else 
+
+        else
         {
             rb.gravityScale = rbGrav;
         }
@@ -259,6 +282,7 @@ public class PlayerControl : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxFallspeed);//Get the real time speed.
         }
+
     }
 
     private void OnDrawGizmos()//You can also use Debug.DrawLine() function. In that case you have to run the game to seeGizmos lines, which is better for animation.
