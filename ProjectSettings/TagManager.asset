@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Coin
-  - grate
-  - checkpoint
-<<<<<<< HEAD
-  - trap
-=======
-  - MovingPlatform
->>>>>>> 1b96ccf38d991c4f1039e12d0a1320fe298128c0
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - ground
-  - Grappable
-  - Trap
+  - 
+  - 
+  - 
   - 
   - 
   - 

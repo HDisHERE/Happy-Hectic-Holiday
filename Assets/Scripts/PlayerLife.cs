@@ -15,7 +15,7 @@ public class PlayerLife : MonoBehaviour
     
 
     //Determines whether player is dead or alive
-    bool dead;
+    public bool dead;
     // Start is called before the first frame update
     void Start()
     {
