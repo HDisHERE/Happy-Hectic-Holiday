@@ -71,7 +71,7 @@ public class PlayerControl : MonoBehaviour
     [Range(0f, 20f)]
     public float fallAdd;
     //public float airFriction;
-    private bool isHoldingJump=false;
+    private bool isHoldingJump = false;
 
     //Jump collision refine
     [Header("Collision refine:")]
@@ -117,6 +117,7 @@ public class PlayerControl : MonoBehaviour
     public static bool hasWatch;
 
     [Header("Speed Shoes:")]
+
     public GameObject Shoes;
     public float shoesRunSpeed;
     public float shoesDashSpeed;
@@ -163,7 +164,7 @@ public class PlayerControl : MonoBehaviour
         {
             Shield.SetActive(true);
         }
-        if(hasGrapple)
+        if (hasGrapple)
         {
             GunPivot.SetActive(true);
         }
@@ -176,7 +177,7 @@ public class PlayerControl : MonoBehaviour
 
         itemUpdate();
 
-        if(DoublePress)
+        if (DoublePress)
         {
             DashCheck();
         }
@@ -185,7 +186,7 @@ public class PlayerControl : MonoBehaviour
             originDashcheck();
         }
 
-        
+
         if (jumpCount > 0 && jumpPress)
         {
 
@@ -193,20 +194,21 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Here is everything about input.
+
         if(!playerLife.dead)
         {
             getInput();
         }
 
 
-            if (isOnGround() && isJumping)
-            {
-                //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
-                //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
-                //drops to the ground. So I choose to use addforce for better experience.
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
+        if (isOnGround() && isJumping)
+        {
+            //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
+            //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
+            //drops to the ground. So I choose to use addforce for better experience.
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
 
         //Shift to dash
         /*if(Input.GetKey(KeyCode.LeftShift)&&canDash)
@@ -224,7 +226,7 @@ public class PlayerControl : MonoBehaviour
     //play landing sound effect
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 6)
         {
             audioSource.PlayOneShot(landSound);
         }
@@ -250,9 +252,9 @@ public class PlayerControl : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(isOnGround())
+        if (isOnGround())
         {
-            if(Mathf.Abs(rb.velocity.x )< 0.5)
+            if (Mathf.Abs(rb.velocity.x) < 0.5)
             {
                 ani.Play("playerIdle");
             }
@@ -260,7 +262,7 @@ public class PlayerControl : MonoBehaviour
             {
                 ani.Play("playerRun");
             }
-            
+
         }
 
         else
@@ -299,9 +301,9 @@ public class PlayerControl : MonoBehaviour
         {
             dashSpeed = shieldDashSpeed;
         }
-
         else
         {
+
 
             dashSpeed =originDashSpeed;
         }
@@ -320,15 +322,15 @@ public class PlayerControl : MonoBehaviour
             maxJumpcount = 1;
         }
 
-        
+
     }
 
     private void PosUpdate()
-    {   
+    {
         if (Inputx != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(Inputx), 1, 1);//Turn around the sprite. 
-            if(Inputx>0)
+            if (Inputx > 0)
             {
                 isTurnRight = true;
             }
@@ -339,7 +341,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Change velocity
-        if(!isUsingHook)
+        if (!isUsingHook)
         {
             rb.velocity = new Vector2(Inputx * currentSpeed, rb.velocity.y);
         }
@@ -366,12 +368,12 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-            
+
     }
 
     private void DashCheck()
     {
-        if (Inputx > 0&&!isRunning)
+        if (Inputx > 0 && !isRunning)
         {
             if (Time.time - rightPresstime <= maxWaittime)
             {
@@ -390,12 +392,12 @@ public class PlayerControl : MonoBehaviour
             leftPresstime = Time.time;
         }
 
-        if (MathF.Abs(movePress) ==1)
+        if (MathF.Abs(movePress) == 1)
         {
             isRunning = true;
             if (canDash)
             {
-                currentSpeed=dashSpeed;
+                currentSpeed = dashSpeed;
                 isDashing = true;
             }
 
@@ -410,29 +412,29 @@ public class PlayerControl : MonoBehaviour
         {
             isRunning = false;
             isDashing = false;
-            canDash=false;
+            canDash = false;
             currentSpeed = runSpeed;
         }
     }
 
     private void originDashcheck()
     {
-        if(MathF.Abs(Inputx) > 0)
+        if (MathF.Abs(Inputx) > 0)
         {
-            isRunning=true;
+            isRunning = true;
             currentSpeed = runSpeed;
-            if(Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 isDashing = true;
                 currentSpeed = dashSpeed;
             }
             else
             {
-                isDashing=false;
+                isDashing = false;
                 currentSpeed = runSpeed;
             }
         }
-            
+
     }
 
     private void CrouchUpdate()
@@ -442,7 +444,7 @@ public class PlayerControl : MonoBehaviour
 
     private void linerDrageUpdate()
     {
-        if((Mathf.Abs(Inputx)<0.5f)&&isOnGround()&&rb.velocity.x!=0)
+        if ((Mathf.Abs(Inputx) < 0.5f) && isOnGround() && rb.velocity.x != 0)
         {
             //rb.AddForce(new Vector2( Mathf.Sign(rb.velocity.x) * (-groundFriction),0f));
             //rb.drag = groundFriction;
@@ -461,8 +463,9 @@ public class PlayerControl : MonoBehaviour
 
     private void JumpUpdate()
     {
-        if(!isUsingHook)
+        if (!isUsingHook)
         {
+
             if(isOnGround()||isTouchingWall())
             {
                 jumpCount = maxJumpcount;
@@ -470,7 +473,7 @@ public class PlayerControl : MonoBehaviour
             //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
             //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
             //drops to the ground. So I choose to use addforce for better experience.
-            if(isJumping)
+            if (isJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -478,7 +481,7 @@ public class PlayerControl : MonoBehaviour
                 audioSource.PlayOneShot(jumpSound);
                 isJumping = false;
             }
-            
+
 
             //Hereis the code to optimize jumping
             if (rb.velocity.y <= 0) //When Falling
@@ -512,7 +515,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnDrawGizmos()//You can also use Debug.DrawLine() function. In that case you have to run the game to seeGizmos lines, which is better for animation.
     {
-        Gizmos.DrawLine(transform.position + cornerRaycastPos, transform.position + cornerRaycastPos + Vector3.up*raycastLength);
+        Gizmos.DrawLine(transform.position + cornerRaycastPos, transform.position + cornerRaycastPos + Vector3.up * raycastLength);
         Gizmos.DrawLine(transform.position - cornerRaycastPos, transform.position - cornerRaycastPos + Vector3.up * raycastLength);
         Gizmos.DrawLine(transform.position + innerRaycastPos, transform.position + innerRaycastPos + Vector3.up * raycastLength);
         Gizmos.DrawLine(transform.position - innerRaycastPos, transform.position - innerRaycastPos + Vector3.up * raycastLength);
@@ -520,27 +523,27 @@ public class PlayerControl : MonoBehaviour
 
     private void Raycastcollision()
     {
-        isCorrecting = Physics2D.Raycast(transform.position + cornerRaycastPos, Vector2.up, raycastLength, groundMask)&&
-            !Physics2D.Raycast(transform.position + innerRaycastPos, Vector2.up, raycastLength, groundMask)||
-            Physics2D.Raycast(transform.position - cornerRaycastPos, Vector2.up, raycastLength, groundMask)&&
+        isCorrecting = Physics2D.Raycast(transform.position + cornerRaycastPos, Vector2.up, raycastLength, groundMask) &&
+            !Physics2D.Raycast(transform.position + innerRaycastPos, Vector2.up, raycastLength, groundMask) ||
+            Physics2D.Raycast(transform.position - cornerRaycastPos, Vector2.up, raycastLength, groundMask) &&
             !Physics2D.Raycast(transform.position - innerRaycastPos, Vector2.up, raycastLength, groundMask)
             ;
     }
 
     private void CornerCorrect(float Yvelocity)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position-innerRaycastPos+Vector3.up*raycastLength,Vector3.left,raycastLength, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position - innerRaycastPos + Vector3.up * raycastLength, Vector3.left, raycastLength, groundMask);
         //Cast the ray in unity and detect if it hits something.
         //Push the player to right if it detected something.
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             float newPos = hit.point.x - (transform.position.x - cornerRaycastPos.x);
-            transform.position = new Vector3(transform.position.x+newPos,transform.position.y,0);
-            rb.velocity = new Vector2(rb.velocity.x,Yvelocity);
+            transform.position = new Vector3(transform.position.x + newPos, transform.position.y, 0);
+            rb.velocity = new Vector2(rb.velocity.x, Yvelocity);
             return;
         }
 
-        hit= Physics2D.Raycast(transform.position + innerRaycastPos + Vector3.up * raycastLength, Vector3.right, raycastLength, groundMask);
+        hit = Physics2D.Raycast(transform.position + innerRaycastPos + Vector3.up * raycastLength, Vector3.right, raycastLength, groundMask);
         if (hit.collider != null)
         {
             float newPos = -hit.point.x + (transform.position.x + cornerRaycastPos.x);
@@ -560,7 +563,7 @@ public class PlayerControl : MonoBehaviour
     {
         return Physics2D.OverlapCircle(leftWallTf.position, 0.1f, groundMask) || Physics2D.OverlapCircle(rightWallTf.position, 0.1f, platformMask);
     }
-    
+
 
     /*private IEnumerator Dash()
     {
@@ -581,9 +584,10 @@ public class PlayerControl : MonoBehaviour
     }*/
     //This is the dash code based on IEnumerator, which is not the effect I want. Maybe it's better to double press move button to dash.
 
-    
+
     public void EnableGrapple()
     {
+
         hasGrapple= true;
         hasShield= false;
         hasShoes= false;
@@ -603,6 +607,7 @@ public class PlayerControl : MonoBehaviour
         hasShield = false;
         hasShoes = true;
         hasWatch = false;
+
     }
 
 }
