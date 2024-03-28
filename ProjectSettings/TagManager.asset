@@ -6,6 +6,10 @@ TagManager:
   tags:
   - shield
   - checkpoint
+  - Coin
+  - grate
+  - checkpoint
+  - Death
   layers:
   - Default
   - TransparentFX
