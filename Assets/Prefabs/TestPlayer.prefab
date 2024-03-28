@@ -114,10 +114,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11944437, y: 0.10733482}
+  m_Offset: {x: 0.11944437, y: -0.030679375}
   m_SpriteTilingProperty:
     border: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0395725, y: 1.9021404}
+  m_Size: {x: 2.0395725, y: 1.4289486}
   m_EdgeRadius: 0
 --- !u!1 &5447209452955866799
 GameObject:
@@ -145,9 +145,11 @@ GameObject:
   - component: {fileID: 798197560430887308}
   - component: {fileID: 5267086693157086761}
   - component: {fileID: 7455098250541048927}
+  - component: {fileID: 7075815484787534291}
+  - component: {fileID: 6382636876198452395}
   m_Layer: 0
   m_Name: TestPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 5447209452955866799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.27, y: 1.5, z: 0}
+  m_LocalPosition: {x: 6.3, y: -5.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -184,12 +186,13 @@ MonoBehaviour:
   currentSpeed: 0
   runSpeed: 16
   isTurnRight: 0
+  DoublePress: 0
   maxWaittime: 0.2
   dashSpeed: 26
   jumpForce: 19
   maxFallspeed: 24
   randomc: 0
-  jumpCount: 2
+  maxJumpcount: 2
   rbGrav: 4
   jumpAdd: 8
   fallAdd: 10
@@ -197,13 +200,15 @@ MonoBehaviour:
   cornerRaycastPos: {x: 0.7, y: 0, z: 0}
   innerRaycastPos: {x: 0.25, y: 0, z: 0}
   isCorrecting: 0
-  iscrouching: 0
-  crouchSpeed: 0
   isUsingHook: 0
-  hookCount: 0
   GunPivot: {fileID: 0}
-  playerSpawnPoint: {fileID: 0}
   Shield: {fileID: 2822579908306127450}
+  shieldDashSpeed: 32
+  isStopping: 0
+  shoesRunSpeed: 20
+  shoesDashSpeed: 40
+  jumpSound: {fileID: 0}
+  landSound: {fileID: 0}
 --- !u!212 &1043392075224555410
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -336,7 +341,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 13.354509
+  m_Distance: 8.543003
   m_DampingRatio: 0
   m_Frequency: 1
 --- !u!95 &7455098250541048927
@@ -360,6 +365,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7075815484787534291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447209452955866799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93442d7a4dad1274596be6918b033753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinNum: 0
+--- !u!114 &6382636876198452395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447209452955866799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973e117150f46b04d94edd2e8bb2c857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawnPoint: {fileID: 0}
+  dead: 0
 --- !u!1 &5975858425856951657
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,10 @@ public class PlayerControl : MonoBehaviour
     //Animation
     Animator ani;
     private Transform groundTf;
+    private Transform leftWallTf;
+    private Transform rightWallTf;
     LayerMask groundMask;
+    LayerMask platformMask;
 
     //Run
 
@@ -114,6 +117,7 @@ public class PlayerControl : MonoBehaviour
     public static bool hasWatch;
 
     [Header("Speed Shoes:")]
+    public GameObject Shoes;
     public float shoesRunSpeed;
     public float shoesDashSpeed;
     public static bool hasShoes;
@@ -132,11 +136,14 @@ public class PlayerControl : MonoBehaviour
     {
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
+        leftWallTf = transform.Find("Leftwall");
+        rightWallTf = transform.Find("Rightwall");
         leftPresstime = rightPresstime = -maxWaittime;
         hookGun= GetComponent <Tutorial_GrapplingGun>();
         
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
+        platformMask = LayerMask.GetMask("platform");
 
 
         audioSource = GetComponent<AudioSource>();
@@ -456,7 +463,7 @@ public class PlayerControl : MonoBehaviour
     {
         if(!isUsingHook)
         {
-            if(isOnGround())
+            if(isOnGround()||isTouchingWall())
             {
                 jumpCount = maxJumpcount;
             }
@@ -546,7 +553,12 @@ public class PlayerControl : MonoBehaviour
     public bool isOnGround()
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
-        return Physics2D.OverlapCircle(groundTf.position, 0.1f, groundMask);
+        return Physics2D.OverlapCircle(groundTf.position, 0.1f, groundMask)||Physics2D.OverlapCircle(groundTf.position, 0.1f,platformMask);
+    }
+
+    public bool isTouchingWall()
+    {
+        return Physics2D.OverlapCircle(leftWallTf.position, 0.1f, groundMask) || Physics2D.OverlapCircle(rightWallTf.position, 0.1f, platformMask);
     }
     
 
@@ -574,11 +586,23 @@ public class PlayerControl : MonoBehaviour
     {
         hasGrapple= true;
         hasShield= false;
+        hasShoes= false;
+        hasWatch= false;
     }
     public void EnableShield()
     {
-        hasShield= true;
-        hasGrapple= false;
+        hasGrapple = false;
+        hasShield = true;
+        hasShoes = false;
+        hasWatch = false;
+    }
+
+    public void EnableSoes()
+    {
+        hasGrapple = true;
+        hasShield = false;
+        hasShoes = true;
+        hasWatch = false;
     }
 
 }
