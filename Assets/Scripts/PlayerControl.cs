@@ -270,7 +270,7 @@ public class PlayerControl : MonoBehaviour
         isHoldingJump = Input.GetButton("Jump");
     }
     
-    private void itemUpdate()
+    public void itemUpdate()
     {
         //Hook
         if(GetComponent<SpringJoint2D>().enabled==true)
@@ -288,7 +288,7 @@ public class PlayerControl : MonoBehaviour
 
         //Shield
         
-        if(Shield.activeSelf)
+        if(hasShield)
         {
             dashSpeed = shieldDashSpeed;
         }
@@ -308,8 +308,8 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            dashSpeed = shoesDashSpeed;
-            runSpeed = shoesRunSpeed;
+            dashSpeed = originDashSpeed;
+            runSpeed = originRunSpeed;
             maxJumpcount = 1;
         }
 
