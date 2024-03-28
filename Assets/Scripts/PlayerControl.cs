@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     private bool isRunning;
     public float currentSpeed;
     public float runSpeed = 16f;
+    private float originRunSpeed;
     //public float dashForce = 2.5f;
     private float Inputx;
     private float movePress;
@@ -37,6 +38,7 @@ public class PlayerControl : MonoBehaviour
     private float leftPresstime;
     private float rightPresstime;
     public float maxWaittime;
+    private float originDashSpeed;
     private bool canDash;
     private bool isDashing;
     public float dashSpeed;
@@ -95,13 +97,11 @@ public class PlayerControl : MonoBehaviour
     //GrapplingHook
     [Header("GrapplingHook:")]
     Tutorial_GrapplingGun hookGun;
-    public bool isUsingHook;
-
-    //ItemLimit
-    public int hookCount=1;
     public static bool hasGrapple;
+    public bool isUsingHook;
     public GameObject GunPivot;
 
+    //Shield
     [Header("Shield:")]
 
     public GameObject Shield;
@@ -143,6 +143,9 @@ public class PlayerControl : MonoBehaviour
 
         playerLife= GetComponent<PlayerLife>();
 
+        originDashSpeed = dashSpeed;
+
+        originRunSpeed= runSpeed;
 
         currentSpeed = runSpeed;
 
@@ -269,16 +272,48 @@ public class PlayerControl : MonoBehaviour
     
     private void itemUpdate()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        //Hook
+        if(GetComponent<SpringJoint2D>().enabled==true)
         {
-            isUsingHook = true;
-            //grapplingHookUpdate();
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                isUsingHook = true;
+                //grapplingHookUpdate();
+            }
+        }
+        else
+        {
+            isUsingHook = false;
+        }
+
+        //Shield
+        
+        if(Shield.activeSelf)
+        {
+            dashSpeed = shieldDashSpeed;
         }
 
         else
         {
-            isUsingHook = false;
-        }    
+
+            dashSpeed =originDashSpeed;
+        }
+
+        //Shoes
+        if(hasShoes)
+        {
+            dashSpeed = shoesDashSpeed;
+            runSpeed = shoesRunSpeed;
+            maxJumpcount = 2;
+        }
+        else
+        {
+            dashSpeed = shoesDashSpeed;
+            runSpeed = shoesRunSpeed;
+            maxJumpcount = 1;
+        }
+
+        
     }
 
     private void PosUpdate()

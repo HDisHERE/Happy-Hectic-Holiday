@@ -830,7 +830,6 @@ MonoBehaviour:
   innerRaycastPos: {x: 0.35, y: 0, z: 0}
   isCorrecting: 0
   isUsingHook: 0
-  hookCount: 0
   GunPivot: {fileID: 0}
   Shield: {fileID: 0}
   shieldDashSpeed: 0
@@ -11592,15 +11591,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2822579908306127450, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3358069179748616626, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
       propertyPath: GunPivot
       value: 
       objectReference: {fileID: 1206599684}
+    - target: {fileID: 3358069179748616626, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
+      propertyPath: maxJumpcount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358069179748616626, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
+      propertyPath: shieldDashSpeed
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 5267086693157086761, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5267086693157086761, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
       propertyPath: m_Distance
@@ -11784,6 +11791,10 @@ PrefabInstance:
     - target: {fileID: 6319454848989442378, guid: bea67db35159e434a95a17aba2b1650b, type: 3}
       propertyPath: m_Name
       value: GunPivot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319454848989442378, guid: bea67db35159e434a95a17aba2b1650b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8728516420777061887, guid: bea67db35159e434a95a17aba2b1650b, type: 3}
       propertyPath: m_TranslationAtRest.x
