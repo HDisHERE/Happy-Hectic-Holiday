@@ -8,9 +8,11 @@ public class PlayerControl : MonoBehaviour
     //Basic Data
     //Animation
     Animator ani;
+    private Transform groundTf;
+    LayerMask groundMask;
 
     //Run
- 
+
     Rigidbody2D rb;
     [Header("Player Run:")]
     [Range(0f, 50f)]
@@ -51,7 +53,8 @@ public class PlayerControl : MonoBehaviour
 
     //Double jump
     [Header("Player Double Jump:")]
-    public int jumpCount = 2;
+    public int maxJumpcount;
+    private int jumpCount;
     private bool isJumping;
 
     //Better Jump
@@ -75,9 +78,9 @@ public class PlayerControl : MonoBehaviour
 
 
     //Crouch
-    [Header("Player Crouch:")]
-    public bool iscrouching;
-    public float crouchSpeed;
+    //[Header("Player Crouch:")]
+    //public bool iscrouching;
+    //public float crouchSpeed;
 
     //Dash
     /*[Header("Player Dash:")]
@@ -91,6 +94,7 @@ public class PlayerControl : MonoBehaviour
     [Header("Items:")]
     //GrapplingHook
     [Header("GrapplingHook:")]
+    Tutorial_GrapplingGun hookGun;
     public bool isUsingHook;
 
     //ItemLimit
@@ -98,16 +102,23 @@ public class PlayerControl : MonoBehaviour
     public static bool hasGrapple;
     public GameObject GunPivot;
 
+    [Header("Shield:")]
+
     public GameObject Shield;
-
-
+    public float shieldDashSpeed;
     public static bool hasShield;
 
+    [Header("StopWatch:")]
+
+    public bool isStopping;
+    public static bool hasWatch;
+
+    [Header("Speed Shoes:")]
+    public float shoesRunSpeed;
+    public float shoesDashSpeed;
+    public static bool hasShoes;
+
     //Death
-
-
-    private Transform groundTf;
-    LayerMask groundMask;
 
     //sound
     public AudioClip jumpSound;
@@ -120,6 +131,7 @@ public class PlayerControl : MonoBehaviour
         rb=GetComponent<Rigidbody2D>();
         groundTf=transform.Find("Ground");
         leftPresstime = rightPresstime = -maxWaittime;
+        hookGun= GetComponent <Tutorial_GrapplingGun>();
         
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
@@ -129,6 +141,8 @@ public class PlayerControl : MonoBehaviour
 
 
         currentSpeed = runSpeed;
+
+        jumpCount = maxJumpcount;
 
 
         if (hasShield)
@@ -249,6 +263,7 @@ public class PlayerControl : MonoBehaviour
         if(Input.GetKey(KeyCode.Mouse0))
         {
             isUsingHook = true;
+            //grapplingHookUpdate();
         }
 
         else
@@ -399,7 +414,7 @@ public class PlayerControl : MonoBehaviour
         {
             if(isOnGround())
             {
-                jumpCount = 2;
+                jumpCount = maxJumpcount;
             }
             //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
             //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
