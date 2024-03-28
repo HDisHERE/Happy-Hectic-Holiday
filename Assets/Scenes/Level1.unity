@@ -1638,7 +1638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2566247358509216196, guid: 75f1c4e1baa6f2d44a0eb7ba5fc7e5df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.49
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 2566247358509216196, guid: 75f1c4e1baa6f2d44a0eb7ba5fc7e5df, type: 3}
       propertyPath: m_LocalPosition.y
@@ -112099,11 +112099,11 @@ PrefabInstance:
       objectReference: {fileID: 1861585764}
     - target: {fileID: 5089430792565675680, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5089430792565675680, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: m_Distance
-      value: 34.14219
+      value: 9.534923
       objectReference: {fileID: 0}
     - target: {fileID: 6593976232328214395, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: rbGrav
@@ -112163,7 +112163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9066309249283444928, guid: 10b33150a916e774d97ed7815b01e381, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -114069,7 +114069,7 @@ Transform:
   m_GameObject: {fileID: 1856385835}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 113.1, y: -2.12, z: -10}
+  m_LocalPosition: {x: 42.6, y: -2.12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
