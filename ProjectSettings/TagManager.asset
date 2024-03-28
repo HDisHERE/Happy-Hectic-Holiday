@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - shield
+  - checkpoint
   - Coin
   - grate
   - checkpoint
@@ -15,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - ground
+  - platform
   - 
   - 
   - 
