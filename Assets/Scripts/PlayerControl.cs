@@ -11,6 +11,8 @@ public class PlayerControl : MonoBehaviour
     private Transform groundTf;
     private Transform leftWallTf;
     private Transform rightWallTf;
+    private Transform KillTf;
+    LayerMask enemyMask;
     LayerMask groundMask;
     LayerMask platformMask;
 
@@ -140,12 +142,14 @@ public class PlayerControl : MonoBehaviour
         groundTf=transform.Find("Ground");
         leftWallTf = transform.Find("Leftwall");
         rightWallTf = transform.Find("Rightwall");
+        KillTf = transform.Find("Killpoint");
         leftPresstime = rightPresstime = -maxWaittime;
         hookGun= GetComponent <Tutorial_GrapplingGun>();
         
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
         platformMask = LayerMask.GetMask("platform");
+        enemyMask = LayerMask.GetMask("enemy");
 
 
         audioSource = GetComponent<AudioSource>();
@@ -208,13 +212,17 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        if (isOnGround() && isJumping)
+        if (isJumping)
         {
             //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
             //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
             //drops to the ground. So I choose to use addforce for better experience.
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpCount--;
+            audioSource.clip = jumpSound;
+            audioSource.Play();
+            isJumping = false;
         }
 
         //Shift to dash
@@ -244,6 +252,7 @@ public class PlayerControl : MonoBehaviour
             Raycastcollision();
             PosUpdate();
             JumpUpdate();
+            EnemyCheck();
         }
             //linerDrageUpdate();//Works with force system
             if (isCorrecting)
@@ -477,7 +486,8 @@ public class PlayerControl : MonoBehaviour
             //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
             //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
             //drops to the ground. So I choose to use addforce for better experience.
-            if (isJumping)
+
+            /*if (isJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -485,7 +495,7 @@ public class PlayerControl : MonoBehaviour
                 audioSource.clip = jumpSound;
                 audioSource.Play();
                 isJumping = false;
-            }
+            }*/
 
 
             //Hereis the code to optimize jumping
@@ -567,6 +577,17 @@ public class PlayerControl : MonoBehaviour
     public bool isTouchingWall()
     {
         return Physics2D.OverlapCircle(leftWallTf.position, 0.1f, groundMask) || Physics2D.OverlapCircle(rightWallTf.position, 0.1f, platformMask);
+    }
+
+    private void EnemyCheck()
+    {
+       Collider2D enemy =Physics2D.OverlapCircle(KillTf.position,0.15f,enemyMask);
+        if(enemy != null) 
+        {
+            Destroy(enemy.gameObject);
+
+            rb.velocity = new Vector2(rb.velocity.x,0f);
+        }
     }
 
 
