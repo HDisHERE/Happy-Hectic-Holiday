@@ -4,44 +4,65 @@ using UnityEngine;
 
 public class MovingPlatformScript : MonoBehaviour
 {
-    public float distance;
-    public float speed;
+    [SerializeField] private GameObject[] Points;
+    
+    private int pointNum=1;
+    
+    
+    [SerializeField] private float Speed = 2f;
     public float wait;
 
-    private Vector2 startPos;
-    private Vector2 destPos;
+    //private Vector2 startPos;
+    //private Vector2 destPos;
     private float direction = 1f;
     private bool isWaiting = false;
 
     void Start()
     {
-        startPos = transform.position;
-        CalculateDestination();
+        StartCoroutine(WaitAtDestination());
     }
 
     void Update()
     {
-        Movement();
+        MovebyPoint();
     }
 
-    private void Movement()
+    private void MovebyPoint()
     {
         if (!isWaiting)
         {
-            transform.position = Vector2.MoveTowards(transform.position, destPos, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
 
-            if (Vector2.Distance(transform.position, destPos) < 0.1f)
+            if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.1f)
             {
                 StartCoroutine(WaitAtDestination());
             }
         }
     }
 
+    /*private void MovebyDis()
+    {
+        if (!isWaiting)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, destPos, Speed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, destPos) < 0.1f)
+            {
+                StartCoroutine(WaitAtDestination());
+            }
+        }
+    }*/
+
     IEnumerator WaitAtDestination()
     {
+        pointNum++;
+        if(pointNum>=Points.Length)
+        {
+            pointNum = 0;
+        }
+        
         isWaiting = true;
         yield return new WaitForSeconds(wait);
-        CalculateDestination();
         isWaiting = false;
     }
 
@@ -59,9 +80,9 @@ public class MovingPlatformScript : MonoBehaviour
             collision.gameObject.transform.SetParent(null);
         }
     }
-    private void CalculateDestination()
+    /*private void CalculateDestination()
     {
         destPos = startPos + Vector2.right * distance * direction;
         direction *= -1;
-    }
+    }*/
 }

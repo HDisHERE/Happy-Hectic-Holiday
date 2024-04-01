@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovingPlatformVerticalScript : MonoBehaviour
 {
+    //Now since I've changed the scripts for moveing platform, it's not necessary to use this script. -Hao
     public float distance;
     public float speed;
     public float wait;

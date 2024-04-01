@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerLife : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && dead == true)
         {
+            //Invoke("Respawn", 1f);
             Respawn();
             Debug.Log("Respawn attempt");
         }
@@ -52,6 +54,7 @@ public class PlayerLife : MonoBehaviour
             dead = false;
             transform.position = playerSpawnPoint.position;
         }
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void PlayerDeath()
