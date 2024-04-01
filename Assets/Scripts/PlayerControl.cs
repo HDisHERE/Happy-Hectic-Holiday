@@ -128,6 +128,7 @@ public class PlayerControl : MonoBehaviour
     private PlayerLife playerLife;
 
     //sound
+    [Header("Audio Resources")]
     public AudioClip jumpSound;
     public AudioClip landSound;
     private AudioSource audioSource;
@@ -232,10 +233,7 @@ public class PlayerControl : MonoBehaviour
     //play landing sound effect
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 6)
-        {
-            audioSource.PlayOneShot(landSound);
-        }
+        
     }
 
     private void FixedUpdate()
@@ -484,7 +482,8 @@ public class PlayerControl : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 jumpCount--;
-                audioSource.PlayOneShot(jumpSound);
+                audioSource.clip = jumpSound;
+                audioSource.Play();
                 isJumping = false;
             }
 
