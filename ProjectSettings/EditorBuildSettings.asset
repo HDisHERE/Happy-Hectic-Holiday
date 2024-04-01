@@ -32,6 +32,21 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SceneConall.unity
     guid: 33cf5dd48a9edc24f9d31edf26cea170
+  - enabled: 1
+    path: Assets/Scenes/GadgetSelect3.unity
+    guid: d7f8e50eb98471842be5e5cc8e19a060
+  - enabled: 1
+    path: Assets/Scenes/GadgetSelect2.unity
+    guid: 64ffe7f06fbcb1a4195d7f9b106f740c
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: 229cfe4497d768b4a9c91299cd708f04
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect2.unity
+    guid: 666bd2a95250fb942ae9b8d706b7ff49
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect3.unity
+    guid: f1ba58a317d3e27458435c5fa0cfa40f
   - enabled: 0
     path: Assets/Scenes/SceneConall2.unity
     guid: 159dac97e3f9b8c408db59992dac3e15
