@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60114627b2f05942be160d66935c24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneTitle: GadgetSelect
+  sceneTitle: LevelSelect
 --- !u!212 &7296813328904883401
 SpriteRenderer:
   m_ObjectHideFlags: 0
