@@ -167,7 +167,13 @@ public class PlayerControl : MonoBehaviour
         if (hasGrapple)
         {
             GunPivot.SetActive(true);
+
         }
+        if(hasShoes)
+        {
+                Shoes.SetActive(true);
+        }
+        
 
     }
 

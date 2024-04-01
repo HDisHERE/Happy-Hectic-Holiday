@@ -8,16 +8,28 @@ public class FadingPlatformScript : MonoBehaviour
     private bool touched = false;
     public float fadeDuration = 1.0f;
     private SpriteRenderer spriteRenderer;
+    public bool reset = false;
+    public canvaHandlerScript deathReset;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        deathReset = FindObjectOfType<canvaHandlerScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(deathReset.enabled)
+        {
+            reset = true;
+        }
+
+        if(reset)
+        {
+            gameObject.SetActive(true);
+            reset=false;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
