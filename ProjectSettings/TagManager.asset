@@ -10,6 +10,9 @@ TagManager:
   - grate
   - checkpoint
   - Death
+  - trap
+  - enemy
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -19,8 +22,8 @@ TagManager:
   - UI
   - ground
   - platform
-  - 
-  - 
+  - enemy
+  - spring
   - 
   - 
   - 

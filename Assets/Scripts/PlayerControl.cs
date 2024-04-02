@@ -61,7 +61,7 @@ public class PlayerControl : MonoBehaviour
     //Double jump
     [Header("Player Double Jump:")]
     public int maxJumpcount;
-    private int jumpCount;
+    public int jumpCount;
     private bool isJumping;
 
     //Better Jump
@@ -209,20 +209,6 @@ public class PlayerControl : MonoBehaviour
         if(!playerLife.dead)
         {
             getInput();
-        }
-
-
-        if (isJumping)
-        {
-            //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
-            //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
-            //drops to the ground. So I choose to use addforce for better experience.
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            jumpCount--;
-            audioSource.clip = jumpSound;
-            audioSource.Play();
-            isJumping = false;
         }
 
         //Shift to dash
@@ -497,6 +483,19 @@ public class PlayerControl : MonoBehaviour
                 isJumping = false;
             }*/
 
+            if (isJumping)
+            {
+                //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);//One way for jumping. May change for optimization later
+                //rb.velocity = Vector2.up * jumpSpeed;//When using this code, the camera slightly shakes when the player
+                //drops to the ground. So I choose to use addforce for better experience.
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                jumpCount--;
+                audioSource.clip = jumpSound;
+                audioSource.Play();
+                isJumping = false;
+            }
+
 
             //Hereis the code to optimize jumping
             if (rb.velocity.y <= 0) //When Falling
@@ -530,10 +529,19 @@ public class PlayerControl : MonoBehaviour
 
     private void OnDrawGizmos()//You can also use Debug.DrawLine() function. In that case you have to run the game to seeGizmos lines, which is better for animation.
     {
+        //Jump Refine
         Gizmos.DrawLine(transform.position + cornerRaycastPos, transform.position + cornerRaycastPos + Vector3.up * raycastLength);
         Gizmos.DrawLine(transform.position - cornerRaycastPos, transform.position - cornerRaycastPos + Vector3.up * raycastLength);
         Gizmos.DrawLine(transform.position + innerRaycastPos, transform.position + innerRaycastPos + Vector3.up * raycastLength);
         Gizmos.DrawLine(transform.position - innerRaycastPos, transform.position - innerRaycastPos + Vector3.up * raycastLength);
+
+        //Ground Tf
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(groundTf.position, new Vector3(0.3f, 0.6f, 0f));
+
+        //Killpoint Tf
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(KillTf.position, 0.5f);
     }
 
     private void Raycastcollision()
@@ -571,7 +579,8 @@ public class PlayerControl : MonoBehaviour
     public bool isOnGround()
     {
         //Check if the player is on the ground by detecting distance of the ground point pos and ground.
-        return Physics2D.OverlapCircle(groundTf.position, 0.1f, groundMask)||Physics2D.OverlapCircle(groundTf.position, 0.1f,platformMask);
+        //return Physics2D.OverlapCircle(groundTf.position, 0.1f, groundMask)||Physics2D.OverlapCircle(groundTf.position, 0.1f,platformMask);
+        return Physics2D.OverlapBox(groundTf.position,new Vector3(0.3f,0.6f,0f), 0f, groundMask) || Physics2D.OverlapBox(groundTf.position, new Vector3(0.3f, 0.6f, 0f), 0f, platformMask);
     }
 
     public bool isTouchingWall()
@@ -581,12 +590,13 @@ public class PlayerControl : MonoBehaviour
 
     private void EnemyCheck()
     {
-       Collider2D enemy =Physics2D.OverlapCircle(KillTf.position,0.15f,enemyMask);
+       Collider2D enemy =Physics2D.OverlapCircle(KillTf.position,0.5f,enemyMask);
         if(enemy != null) 
         {
             Destroy(enemy.gameObject);
 
-            rb.velocity = new Vector2(rb.velocity.x,0f);
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
@@ -610,6 +620,10 @@ public class PlayerControl : MonoBehaviour
     }*/
     //This is the dash code based on IEnumerator, which is not the effect I want. Maybe it's better to double press move button to dash.
 
+    public void eraseJump()
+    {
+        jumpCount--;
+    }
 
     public void EnableGrapple()
     {
