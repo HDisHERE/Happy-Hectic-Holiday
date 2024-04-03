@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 502095837637185356}
   - component: {fileID: 4814222240688245715}
   - component: {fileID: 5089430792565675680}
+  - component: {fileID: -3327642737456196337}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -405,6 +406,7 @@ MonoBehaviour:
   jumpForce: 40
   maxFallspeed: 50
   randomc: 0
+  maxJumpcount: 0
   jumpCount: 2
   rbGrav: 0
   jumpAdd: 20
@@ -413,12 +415,16 @@ MonoBehaviour:
   cornerRaycastPos: {x: 0, y: 0, z: 0}
   innerRaycastPos: {x: 0, y: 0, z: 0}
   isCorrecting: 0
-  iscrouching: 0
-  crouchSpeed: 0
   isUsingHook: 0
-  hookCount: 1
   GunPivot: {fileID: 9066309249283444928}
   Shield: {fileID: 8443416779945275950}
+  shieldDashSpeed: 0
+  isStopping: 0
+  Shoes: {fileID: 0}
+  shoesRunSpeed: 0
+  shoesDashSpeed: 0
+  jumpSound: {fileID: 0}
+  landSound: {fileID: 0}
 --- !u!114 &502095837637185356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93442d7a4dad1274596be6918b033753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
   coinNum: 0
 --- !u!114 &4814222240688245715
 MonoBehaviour:
@@ -465,6 +472,23 @@ SpringJoint2D:
   m_Distance: 2.8772347
   m_DampingRatio: 1
   m_Frequency: 1
+--- !u!114 &-3327642737456196337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510987800549153857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1fd8954aab8f704a986f655ee7d3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelSelect1: LevelSelect
+  levelSelect2: LevelSelect2
+  levelSelect3: LevelSelect3
+  mainMenu: StartScreen
+  inGameMenu: {fileID: 7405924773135893278, guid: d2a86d06cecd8834f94c7584fa3d5c97, type: 3}
 --- !u!1 &3996492501948831808
 GameObject:
   m_ObjectHideFlags: 0
