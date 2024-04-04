@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
+    PlayerControl playerControl;
+
     private Animator ani;
 
     public Transform playerSpawnPoint;
@@ -20,6 +22,7 @@ public class PlayerLife : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerControl = GetComponent<PlayerControl>();
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         canvasToggle = GetComponentInChildren<CanvasHandlerScript>();
@@ -39,10 +42,14 @@ public class PlayerLife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "trap"|| collision.gameObject.tag == "enemy")
+        if(!playerControl.isCrashing)
         {
-            PlayerDeath();
+            if (collision.gameObject.tag == "trap" || collision.gameObject.tag == "enemy")
+            {
+                PlayerDeath();
+            }
         }
+        
     }
 
     public void Respawn()

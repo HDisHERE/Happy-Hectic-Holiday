@@ -249,7 +249,15 @@ public class PlayerControl : MonoBehaviour
     //play landing sound effect
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if(isCrashing)
+        {
+            Bounce();
+        }
+    }
+
+    private void Bounce()
+    {
+        rb.AddForce(Shield.GetComponent<Shield>().GetShieldDir() * -1f * 100f, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()
@@ -333,8 +341,6 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-
-
             dashSpeed =originDashSpeed;
         }
 
