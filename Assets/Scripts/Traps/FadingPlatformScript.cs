@@ -7,13 +7,16 @@ public class FadingPlatformScript : MonoBehaviour
     public float delay = 1.5f;
     private bool touched = false;
     public float fadeDuration = 1.0f;
+    public float reappearDelay = 3f;
     private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
     public bool reset = false;
     public canvaHandlerScript deathReset;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
         deathReset = FindObjectOfType<canvaHandlerScript>();
     }
 
@@ -44,20 +47,23 @@ public class FadingPlatformScript : MonoBehaviour
     IEnumerator Fade() 
     {
         float fadeTime = 0f;
-        Color startColor = spriteRenderer.color;
-        Color EndColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
+        Color startColour = spriteRenderer.color;
+        Color EndColour = new Color(startColour.r, startColour.g, startColour.b, 0f);
         while (fadeTime < delay)
         {
             float t = fadeTime / fadeDuration;
-            spriteRenderer.color = Color.Lerp(startColor, EndColor, t);
+            spriteRenderer.color = Color.Lerp(startColour, EndColour, t);
             fadeTime += Time.deltaTime;
             yield return null;
         }
 
-        // Ensure the target color is set
-        spriteRenderer.color = EndColor;
-
+        spriteRenderer.color = EndColour;
+        
         //yield return new WaitForSeconds(delay);
-        gameObject.SetActive(false);
+        boxCollider.enabled = false;
+        yield return new WaitForSeconds(reappearDelay);
+        spriteRenderer.color = startColour;
+        boxCollider.enabled = true;
+        touched= false;
     }
 }
