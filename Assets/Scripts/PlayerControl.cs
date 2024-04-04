@@ -113,6 +113,18 @@ public class PlayerControl : MonoBehaviour
     public float shieldDashSpeed;
     public static bool hasShield;
 
+    private bool canCrash = true;
+
+    public bool isCrashing;
+
+    [SerializeField] private float CrashSpeed = 100f;
+
+    [SerializeField] private float CrashTime = 0.2f;
+
+    [SerializeField] private float coolDownTime = 1f;
+
+    [SerializeField] private float CrashGravity = 0f;
+
     [Header("StopWatch:")]
 
     public bool isStopping;
@@ -186,6 +198,11 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
 
+        if (isCrashing)
+        {
+            return;
+        }
+
         itemUpdate();
 
         if (DoublePress)
@@ -211,6 +228,11 @@ public class PlayerControl : MonoBehaviour
             getInput();
         }
 
+        if(Input.GetMouseButtonDown(0)&&canCrash)
+        {
+            StartCoroutine(SDash());
+        }
+
         //Shift to dash
         /*if(Input.GetKey(KeyCode.LeftShift)&&canDash)
         {
@@ -232,6 +254,11 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(isCrashing)
+        {
+            return;
+        }
+
         //Here is everything about physical calculation.
         if (!playerLife.dead)
         {
@@ -299,6 +326,10 @@ public class PlayerControl : MonoBehaviour
         if(hasShield)
         {
             dashSpeed = shieldDashSpeed;
+            if (Input.GetMouseButton(0))
+            {
+                StartCoroutine(SDash());
+            }
         }
         else
         {
@@ -312,13 +343,13 @@ public class PlayerControl : MonoBehaviour
         {
             dashSpeed = shoesDashSpeed;
             runSpeed = shoesRunSpeed;
-            maxJumpcount = 2;
+            maxJumpcount = 4;
         }
         else
         {
             dashSpeed = originDashSpeed;
             runSpeed = originRunSpeed;
-            maxJumpcount = 1;
+            maxJumpcount = 2;
         }
 
 
@@ -598,6 +629,28 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    private IEnumerator SDash()
+    {
+        canCrash = false;
+        isCrashing = true;
+
+        float originScale = rb.gravityScale;
+
+        rb.gravityScale = CrashGravity;
+
+        rb.velocity = Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, CrashSpeed);
+
+        yield return new WaitForSeconds(CrashTime);
+
+        rb.gravityScale = originScale;
+
+        isCrashing = false;
+
+        yield return new WaitForSeconds(coolDownTime);
+
+        canCrash = true;
     }
 
 

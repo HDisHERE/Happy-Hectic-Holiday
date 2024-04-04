@@ -13,6 +13,8 @@ TagManager:
   - trap
   - enemy
   - platform
+  - MovingPlatform
+  - door
   layers:
   - Default
   - TransparentFX
