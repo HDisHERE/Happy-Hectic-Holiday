@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class checkpointScript : MonoBehaviour
 {
-
     PlayerLife PlayerLife;
     // Start is called before the first frame update
     void Start()
     {
         PlayerLife = FindObjectOfType<PlayerLife>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 

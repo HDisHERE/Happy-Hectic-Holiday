@@ -15,6 +15,7 @@ public class LevelEndScript : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if(collision.gameObject.CompareTag("Player") && level1Complete == false)
         {
             if (this.currentLevel == 1)
