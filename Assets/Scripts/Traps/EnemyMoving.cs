@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class EnemyMoving : MonoBehaviour
 {
@@ -33,7 +34,20 @@ public class EnemyMoving : MonoBehaviour
     void Update()
     {
         MovebyPoint();
+        if (player.GetComponent<PlayerControl>().isCrashing)
+        {
+            StartCoroutine(DisableCollision());
+        }
+    }
 
+    private void FixedUpdate()
+    {
+        transform.localScale = new Vector3(Mathf.Sign(faceTowards()), 1, 1);
+    }
+
+    private float faceTowards()
+    {
+        return (Points[pointNum].transform.position - transform.position).normalized.x; 
     }
 
     private void MovebyPoint()
@@ -61,10 +75,10 @@ public class EnemyMoving : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("shield")&&!isStun&&player.GetComponent<PlayerControl>().isCrashing)
+
+        if (collision.gameObject.CompareTag("shield")&&!isStun&&player.GetComponent<PlayerControl>().isCrashing)
         {
             StartCoroutine(Stun());
-            StartCoroutine(DisableCollision());
         }
     }
 
@@ -82,7 +96,7 @@ public class EnemyMoving : MonoBehaviour
 
         rb.gravityScale = 1.0f;
 
-        rb.velocity = new Vector2(rb.velocity.x, 5f);
+        rb.velocity = new Vector2(rb.velocity.x, 7f);
 
         yield return new WaitForSeconds(stunTime);
 
@@ -101,7 +115,7 @@ public class EnemyMoving : MonoBehaviour
 
         Physics2D.IgnoreCollision(enemyCollider, playerCollider);
 
-        yield return new WaitForSeconds(stunTime);
+        yield return new WaitForSeconds(0.2f);
 
         Physics2D.IgnoreCollision(enemyCollider, playerCollider,false);
     }

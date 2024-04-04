@@ -78124,7 +78124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1890170286863348619, guid: c60dd0a06e5d852419894b7a16dc74be, type: 3}
       propertyPath: stunTime
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1890170286863348619, guid: c60dd0a06e5d852419894b7a16dc74be, type: 3}
       propertyPath: waitTime
@@ -80604,6 +80604,14 @@ PrefabInstance:
       propertyPath: GunPivot
       value: 
       objectReference: {fileID: 1018645368}
+    - target: {fileID: 3358069179748616626, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
+      propertyPath: CrashTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358069179748616626, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
+      propertyPath: CrashSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5447209452955866799, guid: cb903fd826876264280f9264f1d69ee4, type: 3}
       propertyPath: m_Name
       value: TestPlayer
@@ -86552,6 +86560,10 @@ PrefabInstance:
       propertyPath: ShieldHolder
       value: 
       objectReference: {fileID: 1079352769}
+    - target: {fileID: 3704699787282180189, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
+      propertyPath: m_TagString
+      value: shield
+      objectReference: {fileID: 0}
     - target: {fileID: 3711915714923797032, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.736383
@@ -86602,12 +86614,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3858805139664759809, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
       propertyPath: m_TagString
-      value: shield
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5845312846910849345, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 1864300809}
+    - target: {fileID: 6686135499516338370, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4571753
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686135499516338370, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7071953
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686135499516338370, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.17175436
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686135499516338370, guid: e1c9cc71378a3bd41a02fa6fdd22c826, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.06869459
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
