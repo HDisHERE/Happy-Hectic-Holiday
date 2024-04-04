@@ -15,8 +15,6 @@ public class PlayerLife : MonoBehaviour
 
     Rigidbody2D rb;
 
-
-
     //Determines whether player is dead or alive
     public bool dead;
     // Start is called before the first frame update
@@ -44,7 +42,9 @@ public class PlayerLife : MonoBehaviour
     {
         if(!playerControl.isCrashing)
         {
-            if (collision.gameObject.tag == "trap" || collision.gameObject.tag == "enemy")
+            if (collision.gameObject.tag == "trap" ||
+                (collision.gameObject.tag == "enemy"&& !collision.gameObject.GetComponent<EnemyMoving>().isStun)
+                &&!playerControl.isStopping)
             {
                 PlayerDeath();
             }

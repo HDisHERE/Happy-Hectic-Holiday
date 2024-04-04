@@ -12,24 +12,42 @@ public class arrowScript : MonoBehaviour
     public float arrowSpeed = 10;
     public bool isVertical = true;
 
+    StopTime stopTime;
+
     // Start is called before the first frame update
     void Start()
     {
+        stopTime = GetComponent<StopTime>();
+
         rigidBody = GetComponent<Rigidbody2D>();
         PlayerLife = FindObjectOfType<PlayerLife>();
 
+    }
+
+    private void Update()
+    {
+        arrowMove();
+    }
+
+    private void arrowMove()
+    {
         //moves the arrow
-        if(isVertical)
+
+        if (!stopTime.isStoped)
         {
-            rigidBody.velocity = transform.up * arrowSpeed;
+            if (isVertical)
+            {
+                rigidBody.velocity = transform.up * arrowSpeed;
+
+
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                //rigidBody.velocity = transform.right * (-arrowSpeed);
+                rigidBody.velocity = transform.up * arrowSpeed;
+            }
         }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            //rigidBody.velocity = transform.right * (-arrowSpeed);
-            rigidBody.velocity = transform.up * arrowSpeed;
-        }
-        
     }
 
     //detects when the arrow comes in contact with an object, checks if it is the player, then destroys the arrow

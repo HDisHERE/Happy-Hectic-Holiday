@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6450077660471419946}
   - component: {fileID: 9112346693002436974}
   - component: {fileID: 8783956233028267781}
+  - component: {fileID: 566127149529534569}
   m_Layer: 6
   m_Name: FadingPlatform
   m_TagString: Untagged
@@ -147,3 +148,16 @@ MonoBehaviour:
   fadeDuration: 3
   reset: 1
   deathReset: {fileID: 0}
+--- !u!114 &566127149529534569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266835695483355351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0

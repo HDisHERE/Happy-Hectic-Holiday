@@ -17,8 +17,11 @@ public class MovingPlatformScript : MonoBehaviour
     private float direction = 1f;
     private bool isWaiting = false;
 
+    StopTime stopTime;
+
     void Start()
     {
+        stopTime = GetComponent<StopTime>();
         StartCoroutine(WaitAtDestination());
     }
 
@@ -29,15 +32,19 @@ public class MovingPlatformScript : MonoBehaviour
 
     private void MovebyPoint()
     {
-        if (!isWaiting)
+        if(!stopTime.isStoped)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
-
-            if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.1f)
+            if (!isWaiting)
             {
-                StartCoroutine(WaitAtDestination());
+                transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
+
+                if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.1f)
+                {
+                    StartCoroutine(WaitAtDestination());
+                }
             }
         }
+        
     }
 
     /*private void MovebyDis()

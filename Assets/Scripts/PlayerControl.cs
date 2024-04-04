@@ -117,6 +117,8 @@ public class PlayerControl : MonoBehaviour
 
     public bool isCrashing;
 
+    private bool abilitytoCrash = false;
+
     [SerializeField] private float CrashSpeed = 100f;
 
     [SerializeField] private float CrashTime = 0.2f;
@@ -129,6 +131,7 @@ public class PlayerControl : MonoBehaviour
 
     public bool isStopping;
     public static bool hasWatch;
+    private bool abilitytoStop = false;
 
     [Header("Speed Shoes:")]
 
@@ -228,9 +231,14 @@ public class PlayerControl : MonoBehaviour
             getInput();
         }
 
-        if(Input.GetMouseButtonDown(0)&&canCrash)
+        if(Input.GetMouseButtonDown(0)&&canCrash&&abilitytoCrash)
         {
-            StartCoroutine(SDash());
+            StartCoroutine(SCrash());
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(TimetoMove());
         }
 
         //Shift to dash
@@ -334,10 +342,7 @@ public class PlayerControl : MonoBehaviour
         if(hasShield)
         {
             dashSpeed = shieldDashSpeed;
-            if (Input.GetMouseButton(0))
-            {
-                StartCoroutine(SDash());
-            }
+            
         }
         else
         {
@@ -637,7 +642,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private IEnumerator SDash()
+    private IEnumerator SCrash()
     {
         canCrash = false;
         isCrashing = true;
@@ -657,6 +662,13 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(coolDownTime);
 
         canCrash = true;
+    }
+
+    private IEnumerator TimetoMove()
+    {
+        isStopping = true;
+        yield return new WaitForSeconds(2f);
+        isStopping = false;
     }
 
 
@@ -691,6 +703,8 @@ public class PlayerControl : MonoBehaviour
         hasShield= false;
         hasShoes= false;
         hasWatch= false;
+        abilitytoCrash = false;
+        abilitytoStop = false;
     }
     public void EnableShield()
     {
@@ -698,14 +712,29 @@ public class PlayerControl : MonoBehaviour
         hasShield = true;
         hasShoes = false;
         hasWatch = false;
+        abilitytoCrash = true;
+        abilitytoStop = false;
     }
 
-    public void EnableSoes()
+    public void EnableShoes()
     {
         hasGrapple = true;
         hasShield = false;
         hasShoes = true;
         hasWatch = false;
+        abilitytoCrash = false;
+        abilitytoStop = false;
+
+    }
+
+    public void EnableWatch()
+    {
+        hasGrapple = false;
+        hasShield = false;
+        hasShoes = false;
+        hasWatch = false;
+        abilitytoCrash = false;
+        abilitytoStop = true;
 
     }
 

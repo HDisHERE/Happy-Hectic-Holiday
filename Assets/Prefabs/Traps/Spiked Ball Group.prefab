@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 3796547685458682182}
   - component: {fileID: 3993632241160914990}
   - component: {fileID: 978788639985518960}
+  - component: {fileID: 4348699745408061657}
   m_Layer: 0
   m_Name: Spiked Ball
   m_TagString: trap
@@ -205,6 +206,19 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 2.16
   m_MaxDistanceOnly: 0
+--- !u!114 &4348699745408061657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727289058568943214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0
 --- !u!1 &2146572612139587576
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +231,7 @@ GameObject:
   - component: {fileID: 1563755659475177573}
   - component: {fileID: 2132951310336460272}
   - component: {fileID: 9110307084979614422}
+  - component: {fileID: 3167397130983285593}
   m_Layer: 0
   m_Name: Chain (2)
   m_TagString: Untagged
@@ -343,6 +358,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &3167397130983285593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146572612139587576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0
 --- !u!1 &3006760723861035184
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +383,7 @@ GameObject:
   - component: {fileID: 5893096921573375548}
   - component: {fileID: 5325278584800725206}
   - component: {fileID: 1960163762131078666}
+  - component: {fileID: 7497505658191155244}
   m_Layer: 0
   m_Name: Chain (3)
   m_TagString: Untagged
@@ -481,6 +510,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &7497505658191155244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006760723861035184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0
 --- !u!1 &4308865242352828131
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +535,7 @@ GameObject:
   - component: {fileID: 2616846256838198529}
   - component: {fileID: 8399789860364848406}
   - component: {fileID: 2104416398059906042}
+  - component: {fileID: 8886917002853145155}
   m_Layer: 0
   m_Name: Chain (1)
   m_TagString: Untagged
@@ -619,6 +662,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &8886917002853145155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308865242352828131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0
 --- !u!1 &5141267293696791564
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +687,7 @@ GameObject:
   - component: {fileID: 6204852521750589253}
   - component: {fileID: 8702503626344042585}
   - component: {fileID: 1071989608060478720}
+  - component: {fileID: 4371054798176310275}
   m_Layer: 0
   m_Name: Chain
   m_TagString: Untagged
@@ -757,3 +814,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &4371054798176310275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5141267293696791564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0

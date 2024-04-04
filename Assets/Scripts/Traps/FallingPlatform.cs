@@ -9,23 +9,30 @@ public class FallingPlatform : MonoBehaviour
     [SerializeField] private float destroyDelay = 1.5f;
 
     Rigidbody2D rb;
+    StopTime stopTime;
     // Start is called before the first frame update
     void Start()
     {
+        stopTime=GetComponent<StopTime>();
         rb=GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (stopTime.isStoped)
+        {
+            StopAllCoroutines();
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag=="Player")
         {
-            StartCoroutine(Fall());
+            if (collision.gameObject.tag == "Player")
+            {
+                StartCoroutine(Fall());
+            }
         }
     }
 
@@ -33,6 +40,12 @@ public class FallingPlatform : MonoBehaviour
     {
         yield return new WaitForSeconds(fallDelay);
         rb.bodyType = RigidbodyType2D.Dynamic;
-        Destroy(gameObject,destroyDelay);
+        StartCoroutine(DestoryPlatform());
+    }
+
+    private IEnumerator DestoryPlatform()
+    {
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(gameObject);
     }
 }

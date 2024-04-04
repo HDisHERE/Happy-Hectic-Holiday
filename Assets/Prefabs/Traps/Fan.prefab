@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 6708982994598390247}
   - component: {fileID: 8427943364455939420}
   - component: {fileID: 4385550459351973829}
+  - component: {fileID: 9067540760717253964}
+  - component: {fileID: 4993306347857590360}
+  - component: {fileID: 319488548381452659}
   m_Layer: 6
   m_Name: Wind
   m_TagString: Untagged
@@ -93,11 +96,63 @@ AreaEffector2D:
     m_Bits: 4294967295
   m_UseGlobalAngle: 1
   m_ForceAngle: 180
-  m_ForceMagnitude: 2000
-  m_ForceVariation: 0
+  m_ForceMagnitude: 200
+  m_ForceVariation: 20
   m_ForceTarget: 0
   m_Drag: 0
   m_AngularDrag: 0
+--- !u!114 &9067540760717253964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807703803380299916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437e0214dcd35e544afb6a8125193329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStoped: 0
+--- !u!50 &4993306347857590360
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807703803380299916}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &319488548381452659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807703803380299916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde1c347249516f4db42640e212d8f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8975736017594111835
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 8975736017594111835}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.42, y: -3.41, z: 0}
+  m_LocalPosition: {x: -4.5395093, y: -3.1314013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

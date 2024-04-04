@@ -25,10 +25,13 @@ public class EnemyMoving : MonoBehaviour
     public bool isStun = false;
     [SerializeField] private float stunTime;
 
+    StopTime stopTime;
+
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        stopTime=GetComponent<StopTime>();
     }
 
     void Update()
@@ -52,25 +55,29 @@ public class EnemyMoving : MonoBehaviour
 
     private void MovebyPoint()
     {
-        if (!isWaiting)
+        if(!stopTime.isStoped)
         {
-            if (!isStun)
+            if (!isWaiting)
             {
-                transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
-
-                if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.5f)
+                if (!isStun)
                 {
-                    pointNum++;
+                    transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
 
-                    if (pointNum >= Points.Length)
+                    if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.5f)
                     {
-                        pointNum = 0;
-                    }
+                        pointNum++;
 
-                    StartCoroutine(WaitAtDestination());
+                        if (pointNum >= Points.Length)
+                        {
+                            pointNum = 0;
+                        }
+
+                        StartCoroutine(WaitAtDestination());
+                    }
                 }
             }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -115,8 +122,9 @@ public class EnemyMoving : MonoBehaviour
 
         Physics2D.IgnoreCollision(enemyCollider, playerCollider);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         Physics2D.IgnoreCollision(enemyCollider, playerCollider,false);
     }
+
 }

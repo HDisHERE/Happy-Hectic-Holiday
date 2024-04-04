@@ -5,25 +5,43 @@ using UnityEngine;
 public class springForce : MonoBehaviour
 {
     [SerializeField] private float Force=20f;
+
+    [SerializeField] private bool isOnGround;
+
+    private float originForce;
+
+    StopTime stopTime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        stopTime=GetComponent<StopTime>();
+        originForce = Force;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(stopTime.isStoped)
+        {
+            Force = 0f;
+        }
+        else
+        {
+            Force = originForce;
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag=="Player")
+        if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,Force),ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, Force), ForceMode2D.Impulse);
 
-            collision.gameObject.GetComponent<PlayerControl>().eraseJump();
+            if(isOnGround)
+            {
+                collision.gameObject.GetComponent<PlayerControl>().eraseJump();
+            }
+            
         }
     }
 }

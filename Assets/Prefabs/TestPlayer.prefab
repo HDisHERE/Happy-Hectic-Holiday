@@ -260,7 +260,7 @@ MonoBehaviour:
   Shield: {fileID: 0}
   shieldDashSpeed: 20
   isCrashing: 0
-  CrashSpeed: 50
+  CrashSpeed: 40
   CrashTime: 0.1
   coolDownTime: 1
   CrashGravity: 0

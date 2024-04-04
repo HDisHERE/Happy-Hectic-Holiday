@@ -10,11 +10,14 @@ public class FadingPlatformScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public bool reset = false;
     public canvaHandlerScript deathReset;
+
+    StopTime stopTime;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         deathReset = FindObjectOfType<canvaHandlerScript>();
+        stopTime=GetComponent<StopTime>(); 
     }
 
     // Update is called once per frame
@@ -30,9 +33,14 @@ public class FadingPlatformScript : MonoBehaviour
             gameObject.SetActive(true);
             reset=false;
         }
+
+        if(stopTime.isStoped)
+        {
+            StopAllCoroutines();
+        }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !touched)
         {
