@@ -7,7 +7,11 @@ public class FallingPlatform : MonoBehaviour
     //This is something similar to Fading platform.
     [SerializeField] private float fallDelay=1.5f;
     [SerializeField] private float destroyDelay = 1.5f;
+    [SerializeField] private float reappearDelay=3f;
+    private bool touched = false;
+    //[SerializeField] private float destroyDelay = 1.5f;
 
+    Vector2 startPosition;
     Rigidbody2D rb;
     StopTime stopTime;
     // Start is called before the first frame update
@@ -15,6 +19,7 @@ public class FallingPlatform : MonoBehaviour
     {
         stopTime=GetComponent<StopTime>();
         rb=GetComponent<Rigidbody2D>();
+        startPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -28,11 +33,10 @@ public class FallingPlatform : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if(collision.gameObject.tag=="Player" )
         {
-            if (collision.gameObject.tag == "Player")
-            {
-                StartCoroutine(Fall());
-            }
+            
+            StartCoroutine(Fall());
         }
     }
 
@@ -40,6 +44,7 @@ public class FallingPlatform : MonoBehaviour
     {
         yield return new WaitForSeconds(fallDelay);
         rb.bodyType = RigidbodyType2D.Dynamic;
+
         StartCoroutine(DestoryPlatform());
     }
 
@@ -47,5 +52,11 @@ public class FallingPlatform : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
+
+        /*yield return new WaitForSeconds(reappearDelay);
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        gameObject.transform.position = startPosition;
+        touched = false;*/
+
     }
 }

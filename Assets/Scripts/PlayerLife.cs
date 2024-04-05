@@ -9,11 +9,15 @@ public class PlayerLife : MonoBehaviour
 
     private Animator ani;
 
-    public Transform playerSpawnPoint;
+    public static Transform playerSpawnPoint;
 
     CanvasHandlerScript canvasToggle;
 
     Rigidbody2D rb;
+
+    private int currentSceneIndex;
+
+    public GameObject objectToPreserve;
 
     //Determines whether player is dead or alive
     public bool dead;
@@ -61,7 +65,7 @@ public class PlayerLife : MonoBehaviour
             dead = false;
             transform.position = playerSpawnPoint.position;
         }
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public void PlayerDeath()

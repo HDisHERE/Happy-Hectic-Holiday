@@ -19,7 +19,6 @@ public class StopTime : MonoBehaviour
     {
         isStoped = false;
         rb=GetComponent<Rigidbody2D>();
-        originType = rb.bodyType;
         player = GameObject.FindWithTag("Player");
         playerControl = player.GetComponent<PlayerControl>();
     }
@@ -44,6 +43,8 @@ public class StopTime : MonoBehaviour
     IEnumerator Stop()
     {
         isStoped = true;
+
+        originType = rb.bodyType;
 
         rb.bodyType = RigidbodyType2D.Static;
 
