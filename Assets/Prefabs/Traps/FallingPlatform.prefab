@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5108126497690552783}
   - component: {fileID: 8866290196856587569}
   - component: {fileID: 17266720039433028}
-  - component: {fileID: 3086721897348265616}
   - component: {fileID: 5451060513394197503}
   m_Layer: 6
   m_Name: FallingPlatform
@@ -175,25 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallDelay: 1.5
   destroyDelay: 1.5
---- !u!251 &3086721897348265616
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6868538711491321899}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
+  reappearDelay: 3
 --- !u!114 &5451060513394197503
 MonoBehaviour:
   m_ObjectHideFlags: 0
