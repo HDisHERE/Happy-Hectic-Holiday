@@ -373,11 +373,11 @@ RectTransform:
   m_Children:
   - {fileID: 2019838169}
   - {fileID: 1752675585}
+  - {fileID: 1685672168}
   - {fileID: 1168210784}
   - {fileID: 2089074801}
   - {fileID: 1867065447}
   - {fileID: 1603911914}
-  - {fileID: 1685672168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -531,7 +531,7 @@ Transform:
   m_GameObject: {fileID: 1168210782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -581.53, y: -275.52618, z: 0}
+  m_LocalPosition: {x: -581.53, y: -275.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1133,8 +1133,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -581.49, y: -274.37}
-  m_SizeDelta: {x: 9.3807, y: 1.4499}
+  m_AnchoredPosition: {x: -581.31, y: -274.09}
+  m_SizeDelta: {x: 10.1997, y: 1.4499}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1685672169
 MonoBehaviour:
@@ -1158,8 +1158,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SELECT A POWERUP
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3d2975ab18eca448a166946a778c09d, type: 2}
-  m_sharedMaterial: {fileID: 7574177339072395791, guid: f3d2975ab18eca448a166946a778c09d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1cb3551a6b200e8418754b8bd2a8c679, type: 2}
+  m_sharedMaterial: {fileID: -5738461782625112270, guid: 1cb3551a6b200e8418754b8bd2a8c679, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
