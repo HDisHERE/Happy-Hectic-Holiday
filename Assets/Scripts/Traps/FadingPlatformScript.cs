@@ -67,7 +67,6 @@ public class FadingPlatformScript : MonoBehaviour
 
         spriteRenderer.color = EndColour;
         
-        //yield return new WaitForSeconds(delay);
         boxCollider.enabled = false;
         yield return new WaitForSeconds(reappearDelay);
         spriteRenderer.color = startColour;
