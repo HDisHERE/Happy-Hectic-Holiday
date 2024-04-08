@@ -277,13 +277,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 255424654}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 255424660}
+        m_TargetAssemblyTypeName: ButtonDisableEnable, Assembly-CSharp
+        m_MethodName: levelSelectClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 255424656}
   - component: {fileID: 255424655}
   - component: {fileID: 255424659}
+  - component: {fileID: 255424660}
   m_Layer: 5
   m_Name: New Canvas
   m_TagString: Untagged
@@ -448,6 +449,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneTitle: GadgetSelect
+--- !u!114 &255424660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255424654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d1ce618d05bcb4caedae46996117d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level1: {fileID: 804144200}
+  level2: {fileID: 686070969}
 --- !u!1 &493124076
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &686070970
 RectTransform:
   m_ObjectHideFlags: 0
@@ -862,7 +877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &804144201
 RectTransform:
   m_ObjectHideFlags: 0
