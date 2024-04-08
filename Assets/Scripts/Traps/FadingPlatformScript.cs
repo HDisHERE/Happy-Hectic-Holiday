@@ -22,7 +22,7 @@ public class FadingPlatformScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         deathReset = FindObjectOfType<canvaHandlerScript>();
-        stopTime=GetComponent<StopTime>();
+        stopTime = GetComponent<StopTime>();
 
         StartColour = spriteRenderer.color;
         EndColour = new Color(StartColour.r, StartColour.g, StartColour.b, 0f);
@@ -42,7 +42,7 @@ public class FadingPlatformScript : MonoBehaviour
             reset=false;
         }*/
 
-        if(stopTime.isStoped)
+        if (stopTime.isStoped)
         {
             StopAllCoroutines();
         }
@@ -56,8 +56,8 @@ public class FadingPlatformScript : MonoBehaviour
             }
         }
 
-        
-        
+
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -67,7 +67,7 @@ public class FadingPlatformScript : MonoBehaviour
             istouched = true;
         }
 
-        
+
     }
 
     IEnumerator Delay()
@@ -76,7 +76,7 @@ public class FadingPlatformScript : MonoBehaviour
         StartCoroutine(Fade());
     }
 
-    IEnumerator Fade() 
+    IEnumerator Fade()
     {
         float fadeTime = 0f;
 
@@ -88,12 +88,14 @@ public class FadingPlatformScript : MonoBehaviour
             fadeTime += Time.deltaTime;
             yield return null;
         }
-        
-
         spriteRenderer.color = EndColour;
-        
-        //yield return new WaitForSeconds(delay);
         boxCollider.enabled = false;
+
+        StartCoroutine(Reappear());
+    }
+
+    IEnumerator Reappear()
+    {
         yield return new WaitForSeconds(reappearDelay);
         spriteRenderer.color = StartColour;
         boxCollider.enabled = true;

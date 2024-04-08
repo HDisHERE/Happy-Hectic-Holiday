@@ -265,7 +265,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Bounce()
     {
-        rb.AddForce(Shield.GetComponent<Shield>().GetShieldDir() * -1f * 100f, ForceMode2D.Impulse);
+        rb.AddForce(Shield.GetComponent<Shield>().GetShieldDir() * -1f * 10f, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()
