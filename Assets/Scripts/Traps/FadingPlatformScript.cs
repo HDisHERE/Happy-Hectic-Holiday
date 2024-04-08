@@ -88,14 +88,12 @@ public class FadingPlatformScript : MonoBehaviour
             fadeTime += Time.deltaTime;
             yield return null;
         }
+        
+
         spriteRenderer.color = EndColour;
+        
+        //yield return new WaitForSeconds(delay);
         boxCollider.enabled = false;
-
-        StartCoroutine (Reappear());
-    }
-
-    IEnumerator Reappear()
-    {
         yield return new WaitForSeconds(reappearDelay);
         spriteRenderer.color = StartColour;
         boxCollider.enabled = true;

@@ -9,15 +9,13 @@ public class PlayerLife : MonoBehaviour
 
     private Animator ani;
 
-    public static Transform playerSpawnPoint;
+    public Transform playerSpawnPoint;
 
     CanvasHandlerScript canvasToggle;
 
     Rigidbody2D rb;
 
     private int currentSceneIndex;
-
-    public GameObject objectToPreserve;
 
     //Determines whether player is dead or alive
     public bool dead;
