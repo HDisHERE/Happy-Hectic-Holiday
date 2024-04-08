@@ -5,13 +5,18 @@ using UnityEngine;
 public class arrowTrapScript : MonoBehaviour
 {
     public GameObject arrow;
-    [SerializeField] public float arrowCooldown = 2;
-    [SerializeField] public float arrowOffset = 0;
+    [SerializeField] private float arrowCooldown = 2;
+    [SerializeField] private float arrowOffset = 0;
     public bool verticalArrow = true;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnArrow());
+    }
+
+    private void Update()
+    {
+        //StartCoroutine(SpawnArrow());
     }
 
     IEnumerator SpawnArrow()

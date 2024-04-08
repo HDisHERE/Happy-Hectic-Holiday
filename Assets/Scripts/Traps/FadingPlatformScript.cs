@@ -5,13 +5,15 @@ using UnityEngine;
 public class FadingPlatformScript : MonoBehaviour
 {
     public float delay = 1.5f;
-    private bool touched = false;
+    [SerializeField] private bool istouched = false;
     public float fadeDuration = 1.0f;
     public float reappearDelay = 3f;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
     public bool reset = false;
     public canvaHandlerScript deathReset;
+    Color StartColour;
+    Color EndColour;
 
     StopTime stopTime;
     // Start is called before the first frame update
@@ -20,58 +22,80 @@ public class FadingPlatformScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         deathReset = FindObjectOfType<canvaHandlerScript>();
-        stopTime=GetComponent<StopTime>(); 
+        stopTime = GetComponent<StopTime>();
+
+        StartColour = spriteRenderer.color;
+        EndColour = new Color(StartColour.r, StartColour.g, StartColour.b, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(deathReset.enabled)
+        /*if(deathReset.enabled)
         {
             reset = true;
-        }
+        }*/
 
-        if(reset)
+        /*if(reset)
         {
             gameObject.SetActive(true);
             reset=false;
-        }
-
-        if(stopTime.isStoped)
+        }*/
+        /*
+        if (stopTime.isStoped)
         {
             StopAllCoroutines();
+            
         }
+        */
+        
+
+
+
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !touched)
+        if (collision.gameObject.tag == "Player" && istouched == false)
         {
-            touched = true;
+            istouched = true;
             StartCoroutine(Fade());
         }
     }
 
-    IEnumerator Fade() 
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(fadeDuration);
+        StartCoroutine(Fade());
+    }
+
+    IEnumerator Fade()
     {
         float fadeTime = 0f;
-        Color startColour = spriteRenderer.color;
-        Color EndColour = new Color(startColour.r, startColour.g, startColour.b, 0f);
+
+        yield return new WaitForSeconds(delay);
         while (fadeTime < delay)
         {
             float t = fadeTime / fadeDuration;
-            spriteRenderer.color = Color.Lerp(startColour, EndColour, t);
+            spriteRenderer.color = Color.Lerp(StartColour, EndColour, t);
             fadeTime += Time.deltaTime;
+            while (stopTime.isStoped!)
+            {
+                yield return null;
+            }
             yield return null;
         }
-
         spriteRenderer.color = EndColour;
-        
-        //yield return new WaitForSeconds(delay);
         boxCollider.enabled = false;
+
+        StartCoroutine(Reappear());
+    }
+
+    IEnumerator Reappear()
+    {
         yield return new WaitForSeconds(reappearDelay);
-        spriteRenderer.color = startColour;
+        spriteRenderer.color = StartColour;
         boxCollider.enabled = true;
-        touched= false;
+        istouched = false;
     }
 }

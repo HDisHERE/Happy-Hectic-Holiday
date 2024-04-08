@@ -16,6 +16,11 @@ public class SpikeBallControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        rb.velocity=new Vector2 (rb.velocity.x,rb.velocity.y);
+
+      if(rb.velocity.y > 0) 
+       {
+            rb.AddForce(new Vector2(0f, 0.02f), ForceMode2D.Impulse); 
+       }
     }
 }

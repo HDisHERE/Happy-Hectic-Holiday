@@ -8,13 +8,14 @@ public class FallingPlatform : MonoBehaviour
     [SerializeField] private float fallDelay=1.5f;
     //[SerializeField] private float destroyDelay = 1.5f;
     [SerializeField] private float reappearDelay=3f;
-    private bool touched = false;
+    [SerializeField] private bool istouched = false;
     //[SerializeField] private float destroyDelay = 1.5f;
 
     Vector2 startPos;
     Quaternion startRot;
     Rigidbody2D rb;
     StopTime stopTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,26 +32,42 @@ public class FallingPlatform : MonoBehaviour
         {
             StopAllCoroutines();
         }
+
+        else
+        {
+            if (istouched)
+            {
+                StartCoroutine(Fall());
+                
+                istouched = false;
+                
+            }
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag=="Player" &&!touched)
-        {
-            touched = true;
-            StartCoroutine(Fall());
-        }
+        
+            if (collision.gameObject.tag == "Player")
+            {
+                istouched = true;
+            }
     }
 
     private IEnumerator Fall()
     {
-        yield return new WaitForSeconds(fallDelay);
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        if(istouched)
+        {
+            yield return new WaitForSeconds(fallDelay);
+            rb.bodyType = RigidbodyType2D.Dynamic;
 
-        StartCoroutine(DestoryPlatform());
+            StartCoroutine(ResetPlatform());
+        }
+        
+
     }
 
-    private IEnumerator DestoryPlatform()
+    private IEnumerator ResetPlatform()
     {
         /*yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);*/
@@ -59,7 +76,6 @@ public class FallingPlatform : MonoBehaviour
         gameObject.transform.position = startPos;
         gameObject.transform.rotation=startRot;
         rb.bodyType = RigidbodyType2D.Static;
-        touched = false;
-
+        //istouched = false;
     }
 }

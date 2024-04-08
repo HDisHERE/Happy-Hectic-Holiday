@@ -52,7 +52,7 @@ public class StopTime : MonoBehaviour
 
         rb.bodyType = originType;
 
-        rb.AddForce(velocityBeforeStop.normalized*5f,ForceMode2D.Impulse);
+        rb.AddForce(velocityBeforeStop.normalized*6f,ForceMode2D.Impulse);
 
         isStoped =false;
     }

@@ -236,7 +236,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(SCrash());
         }
 
-        if (Input.GetMouseButtonDown(0)&&abilitytoStop)
+        if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(TimetoMove());
         }
@@ -265,7 +265,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Bounce()
     {
-        rb.AddForce(Shield.GetComponent<Shield>().GetShieldDir() * -1f * 100f, ForceMode2D.Impulse);
+        rb.AddForce(Shield.GetComponent<Shield>().GetShieldDir() * -1f * 10f, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()
@@ -651,7 +651,8 @@ public class PlayerControl : MonoBehaviour
 
         rb.gravityScale = CrashGravity;
 
-        rb.velocity = Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, CrashSpeed);
+        //rb.velocity = Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, CrashSpeed);
+        rb.velocity= Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, 0f);
 
         yield return new WaitForSeconds(CrashTime);
 

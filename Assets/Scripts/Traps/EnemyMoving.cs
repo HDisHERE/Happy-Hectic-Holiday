@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class EnemyMoving : MonoBehaviour
 
     StopTime stopTime;
 
+
+    private CinemachineImpulseSource impulseSource;
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
@@ -85,6 +88,8 @@ public class EnemyMoving : MonoBehaviour
 
         if (collision.gameObject.CompareTag("shield")&&!isStun&&player.GetComponent<PlayerControl>().isCrashing)
         {
+            //CameraShake.instance.DoShake(0.02f,0.55f);
+            //ShakingCamera.Instance.CameraShake(impulseSource);
             StartCoroutine(Stun());
         }
     }
@@ -100,6 +105,8 @@ public class EnemyMoving : MonoBehaviour
     IEnumerator Stun()
     {
         isStun = true;
+
+        
 
         rb.gravityScale = 1.0f;
 
