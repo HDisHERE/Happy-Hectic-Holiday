@@ -32,6 +32,7 @@ public class Shield : MonoBehaviour
 
     public Vector2 GetShieldDir()
     {
-        return new Vector2(mousePos.x-transform.position.x, mousePos.y - transform.position.y).normalized;
+        //return new Vector2(mousePos.x-transform.position.x, mousePos.y - transform.position.y).normalized;
+        return new Vector2(mousePos.x - transform.position.x, 0f).normalized;
     }
 }

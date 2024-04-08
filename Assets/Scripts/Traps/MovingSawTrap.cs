@@ -17,9 +17,12 @@ public class MovingSawTrap : MonoBehaviour
     private float direction = 1f;
     private bool isWaiting = false;
 
+    StopTime stopTime;
+
     void Start()
     {
         StartCoroutine(WaitAtDestination());
+        stopTime=GetComponent<StopTime>();
     }
 
     void Update()
@@ -29,15 +32,20 @@ public class MovingSawTrap : MonoBehaviour
 
     private void MovebyPoint()
     {
-        if (!isWaiting)
+        if(!stopTime.isStoped)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
-
-            if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.1f)
+            if (!isWaiting)
             {
-                StartCoroutine(WaitAtDestination());
+                transform.position = Vector2.MoveTowards(transform.position, Points[pointNum].transform.position, Speed * Time.deltaTime);
+
+                if (Vector2.Distance(transform.position, Points[pointNum].transform.position) < 0.1f)
+                {
+                    StartCoroutine(WaitAtDestination());
+                }
             }
         }
+            
+        
     }
 
     IEnumerator WaitAtDestination()
@@ -47,7 +55,6 @@ public class MovingSawTrap : MonoBehaviour
         {
             pointNum = 0;
         }
-
         isWaiting = true;
         yield return new WaitForSeconds(wait);
         isWaiting = false;

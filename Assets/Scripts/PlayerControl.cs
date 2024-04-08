@@ -231,7 +231,7 @@ public class PlayerControl : MonoBehaviour
             getInput();
         }
 
-        if(Input.GetMouseButtonDown(0)&&canCrash&&abilitytoCrash)
+        if(Input.GetMouseButtonDown(0)&&canCrash)
         {
             StartCoroutine(SCrash());
         }
@@ -651,7 +651,8 @@ public class PlayerControl : MonoBehaviour
 
         rb.gravityScale = CrashGravity;
 
-        rb.velocity = Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, CrashSpeed);
+        //rb.velocity = Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, CrashSpeed);
+        rb.velocity= Shield.GetComponent<Shield>().GetShieldDir() * new Vector2(CrashSpeed, 0f);
 
         yield return new WaitForSeconds(CrashTime);
 
