@@ -58,7 +58,7 @@ public class arrowScript : MonoBehaviour
             PlayerLife.PlayerDeath();
             Debug.Log("arrow hit player");
         }
-        if(!collision.gameObject.CompareTag("grate"))
+        if(!collision.gameObject.CompareTag("grate") && !collision.gameObject.CompareTag("Coin"))
         {
             Destroy(gameObject);
         }
