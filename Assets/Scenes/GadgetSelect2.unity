@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 81356616}
   - component: {fileID: 81356617}
   m_Layer: 0
-  m_Name: Selector
+  m_Name: Underline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -494,7 +494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &291876828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &455477404
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1420,7 +1420,7 @@ GameObject:
   - component: {fileID: 1081967924}
   - component: {fileID: 1081967923}
   m_Layer: 5
-  m_Name: Toy Shield
+  m_Name: Stopwatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1492,7 +1492,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2100207835}
         m_TargetAssemblyTypeName: PlayerControl, Assembly-CSharp
-        m_MethodName: EnableShield
+        m_MethodName: EnableWatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1534,7 +1534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f3fad2d126119864392f075cc4ec202a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f09d87df2a0122428384eeb8764bba5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1565,7 +1565,7 @@ GameObject:
   - component: {fileID: 1195118138}
   - component: {fileID: 1195118137}
   m_Layer: 5
-  m_Name: Grappling Hook
+  m_Name: Boots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1637,7 +1637,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2100207835}
         m_TargetAssemblyTypeName: PlayerControl, Assembly-CSharp
-        m_MethodName: EnableGrapple
+        m_MethodName: EnableShoes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eb0f0c39c0db0ec4eba8a171434b4894, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7746d300fd924a4d90f8ad83bc189fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
