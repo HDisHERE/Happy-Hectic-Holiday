@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class springForce : MonoBehaviour
 {
-    [SerializeField] private float Force=20f;
+    [SerializeField] private float Force=2000f;
 
     [SerializeField] private bool isOnGround;
 
@@ -35,13 +35,9 @@ public class springForce : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, Force), ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up*Force, ForceMode2D.Impulse);
 
-            if(isOnGround)
-            {
-                collision.gameObject.GetComponent<PlayerControl>().eraseJump();
-            }
-            
+            collision.gameObject.GetComponent<PlayerControl>().jumpCount = 1;
         }
     }
 }

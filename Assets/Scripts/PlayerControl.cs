@@ -231,12 +231,12 @@ public class PlayerControl : MonoBehaviour
             getInput();
         }
 
-        if(Input.GetMouseButtonDown(0)&&canCrash)
+        if(Input.GetMouseButtonDown(0)&&canCrash&&abilitytoCrash)
         {
             StartCoroutine(SCrash());
         }
 
-        if (Input.GetMouseButtonDown(0)&&abilitytoStop)
+        if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(TimetoMove());
         }

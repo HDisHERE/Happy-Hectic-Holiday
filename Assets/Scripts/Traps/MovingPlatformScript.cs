@@ -78,6 +78,8 @@ public class MovingPlatformScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.transform.SetParent(transform);
+
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -85,6 +87,8 @@ public class MovingPlatformScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.transform.SetParent(null);
+
+            //collision.gameObject.GetComponent<PlayerControl>().eraseJump();
         }
     }
     /*private void CalculateDestination()
