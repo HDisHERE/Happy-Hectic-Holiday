@@ -41,12 +41,13 @@ public class FadingPlatformScript : MonoBehaviour
             gameObject.SetActive(true);
             reset=false;
         }*/
-
+        /*
         if (stopTime.isStoped)
         {
             StopAllCoroutines();
+            
         }
-
+        */
         
 
 
@@ -78,6 +79,10 @@ public class FadingPlatformScript : MonoBehaviour
             float t = fadeTime / fadeDuration;
             spriteRenderer.color = Color.Lerp(StartColour, EndColour, t);
             fadeTime += Time.deltaTime;
+            while (stopTime.isStoped!)
+            {
+                yield return null;
+            }
             yield return null;
         }
         spriteRenderer.color = EndColour;
