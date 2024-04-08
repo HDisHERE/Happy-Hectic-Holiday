@@ -25,6 +25,7 @@ public class LevelEndScript : MonoBehaviour
             SceneManager.LoadScene(LevelSelect2);
             Debug.Log("load");
         }
+        /*
         else if (collision.gameObject.CompareTag("Player") && level1Complete == true && level2Complete == false)
         {
             if (this.currentLevel == 2)
@@ -37,6 +38,7 @@ public class LevelEndScript : MonoBehaviour
         {
             SceneManager.LoadScene(LevelSelect3);
         }
+        */
 
     }
 }

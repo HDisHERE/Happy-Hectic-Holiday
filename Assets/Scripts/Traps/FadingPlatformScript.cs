@@ -47,27 +47,19 @@ public class FadingPlatformScript : MonoBehaviour
             StopAllCoroutines();
         }
 
-        else
-        {
-            if (istouched)
-            {
-                StartCoroutine(Fade());
-                istouched = false;
-            }
-        }
+        
 
 
 
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && istouched == false)
         {
             istouched = true;
+            StartCoroutine(Fade());
         }
-
-
     }
 
     IEnumerator Delay()
@@ -99,6 +91,6 @@ public class FadingPlatformScript : MonoBehaviour
         yield return new WaitForSeconds(reappearDelay);
         spriteRenderer.color = StartColour;
         boxCollider.enabled = true;
-        //istouched = false;
+        istouched = false;
     }
 }
