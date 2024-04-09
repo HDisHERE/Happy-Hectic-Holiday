@@ -15,6 +15,12 @@ public class SceneLoaderScript : MonoBehaviour
         Debug.Log("scene " + sceneTitle + " load attempt");
     }
 
+    // Restarts the scene
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void Exit()
     {
         Application.Quit();
