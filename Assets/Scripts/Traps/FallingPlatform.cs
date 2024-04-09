@@ -54,6 +54,16 @@ public class FallingPlatform : MonoBehaviour
             }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Death")
+        {
+            gameObject.transform.position = startPos;
+            gameObject.transform.rotation = startRot;
+            rb.bodyType = RigidbodyType2D.Static;
+        }
+    }
+
     private IEnumerator Fall()
     {
         if(istouched)

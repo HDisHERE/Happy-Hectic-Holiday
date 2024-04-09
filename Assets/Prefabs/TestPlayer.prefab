@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 5447209452955866799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.736383, y: -3.05, z: 0}
+  m_LocalPosition: {x: -5, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -260,9 +260,9 @@ MonoBehaviour:
   Shield: {fileID: 0}
   shieldDashSpeed: 20
   isCrashing: 0
-  CrashSpeed: 40
-  CrashTime: 0.1
-  coolDownTime: 1
+  CrashSpeed: 30
+  CrashTime: 0.2
+  coolDownTime: 0.5
   CrashGravity: 0
   isStopping: 0
   Shoes: {fileID: 6124882917813898922}
@@ -310,7 +310,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1978682993, guid: 219d9bc5e4fea8746979bc9c8cfd0881, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

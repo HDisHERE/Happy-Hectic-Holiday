@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3453927615223638824}
   - component: {fileID: 4573879972536556546}
   - component: {fileID: 6440654260817994882}
+  - component: {fileID: 4087952360945675554}
   m_Layer: 0
   m_Name: Stopwatch
   m_TagString: Untagged
@@ -119,3 +120,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963f710022d0a2f4ba548cbd2a8d5bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1773428102 &4087952360945675554
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821906003219242927}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: -2.759169, y: -0.74671674, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets: []
+  m_RotationOffsets: []
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 0
+  m_IsLocked: 0
+  m_Sources: []
