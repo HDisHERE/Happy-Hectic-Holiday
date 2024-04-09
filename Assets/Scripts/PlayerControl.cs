@@ -302,7 +302,15 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                ani.Play("playerRun");
+                if(MathF.Abs(rb.velocity.x)<=20)
+                {
+                    ani.Play("playerRun");
+                }
+                
+                else
+                {
+                    ani.Play("playerDash");
+                }
             }
 
         }
