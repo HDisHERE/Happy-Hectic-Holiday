@@ -236,7 +236,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(SCrash());
         }
 
-        if (Input.GetMouseButtonDown(0)&&abilitytoStop)
+        if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(TimetoMove());
         }

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: playerDash
+  m_Name: stopwatchStop
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1253310994, guid: cc3184fbbfa971f4d950c1d23147a7f8, type: 3}
+      value: {fileID: -1565798174, guid: 95ba2c92314e73f44a1d03a5a3dd2419, type: 3}
     - time: 0.083333336
-      value: {fileID: 1913658150, guid: cc3184fbbfa971f4d950c1d23147a7f8, type: 3}
+      value: {fileID: -547086228, guid: 95ba2c92314e73f44a1d03a5a3dd2419, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,8 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1253310994, guid: cc3184fbbfa971f4d950c1d23147a7f8, type: 3}
-    - {fileID: 1913658150, guid: cc3184fbbfa971f4d950c1d23147a7f8, type: 3}
+    - {fileID: -1565798174, guid: 95ba2c92314e73f44a1d03a5a3dd2419, type: 3}
+    - {fileID: -547086228, guid: 95ba2c92314e73f44a1d03a5a3dd2419, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
