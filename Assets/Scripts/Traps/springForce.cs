@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class springForce : MonoBehaviour
 {
-    [SerializeField] private float Force=2000f;
+    [SerializeField] private float Force=200f;
 
     [SerializeField] private bool isOnGround;
 
@@ -31,13 +31,22 @@ public class springForce : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up*Force, ForceMode2D.Impulse);
+            Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+            playerRb.velocity = new Vector2();
+
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * Force, ForceMode2D.Impulse);
 
             collision.gameObject.GetComponent<PlayerControl>().jumpCount = 1;
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        
     }
 }

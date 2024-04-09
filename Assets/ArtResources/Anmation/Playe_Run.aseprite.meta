@@ -121,15 +121,15 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Playe_Run_Frame_0
     originalName: 
-    pivot: {x: 0.45833334, y: -0.4848485}
+    pivot: {x: 0.45833334, y: -0.58064514}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 37
-      y: 46
+      y: 42
       width: 24
-      height: 33
+      height: 31
     spriteID: 2ebab8a65dfdd894cbdd63a2bdab87f4
     spriteBone: []
     spriteOutline: []
@@ -138,18 +138,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 37, y: 46}
+    uvTransform: {x: 37, y: 42}
   - name: Playe_Run_Frame_1
     originalName: 
-    pivot: {x: 0.45833334, y: -0.47058824}
+    pivot: {x: 0.45833334, y: -0.59375}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 88
+      y: 43
       width: 24
-      height: 34
+      height: 32
     spriteID: e7783cd027baf314c8ed415fc5440772
     spriteBone: []
     spriteOutline: []
@@ -158,18 +158,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 88}
+    uvTransform: {x: 4, y: 43}
   - name: Playe_Run_Frame_2
     originalName: 
-    pivot: {x: 0.45833334, y: -0.47058824}
+    pivot: {x: 0.45833334, y: -0.59375}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 37
-      y: 4
+      x: 4
+      y: 83
       width: 24
-      height: 34
+      height: 32
     spriteID: fc49a7a6572440a4bb73505a5b623f68
     spriteBone: []
     spriteOutline: []
@@ -178,18 +178,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 37, y: 4}
+    uvTransform: {x: 4, y: 83}
   - name: Playe_Run_Frame_3
     originalName: 
-    pivot: {x: 0.45833334, y: -0.4848485}
+    pivot: {x: 0.45833334, y: -0.58064514}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 37
-      y: 87
+      y: 81
       width: 24
-      height: 33
+      height: 31
     spriteID: d5abfbbcbc5c40a4ba0b1e415530841e
     spriteBone: []
     spriteOutline: []
@@ -198,7 +198,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 37, y: 87}
+    uvTransform: {x: 37, y: 81}
   - name: Playe_Run_Frame_4
     originalName: 
     pivot: {x: 0.45833334, y: -0.5}
@@ -206,8 +206,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 69
-      y: 45
+      x: 4
+      y: 123
       width: 24
       height: 32
     spriteID: d2b88409c51178b40968afe8477d3664
@@ -218,7 +218,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 69, y: 45}
+    uvTransform: {x: 4, y: 123}
   - name: Playe_Run_Frame_5
     originalName: 
     pivot: {x: 0.45833334, y: -0.5}
@@ -226,8 +226,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 69
-      y: 85
+      x: 4
+      y: 163
       width: 24
       height: 32
     spriteID: 23f809e600e801548a66b651a5f5293f
@@ -238,18 +238,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 69, y: 85}
+    uvTransform: {x: 4, y: 163}
   - name: Playe_Run_Frame_6
     originalName: 
-    pivot: {x: 0.45833334, y: -0.4848485}
+    pivot: {x: 0.45833334, y: -0.61290324}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 69
-      y: 4
+      x: 37
+      y: 120
       width: 24
-      height: 33
+      height: 31
     spriteID: ded6562626574c747af971af3ba22939
     spriteBone: []
     spriteOutline: []
@@ -258,18 +258,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 69, y: 4}
+    uvTransform: {x: 37, y: 120}
   - name: Playe_Run_Frame_7
     originalName: 
-    pivot: {x: 0.44, y: -0.47058824}
+    pivot: {x: 0.44, y: -0.6666667}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
+      x: 37
       y: 4
       width: 25
-      height: 34
+      height: 30
     spriteID: d76c3554f9590234484a1ddfe4d66518
     spriteBone: []
     spriteOutline: []
@@ -278,18 +278,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
+    uvTransform: {x: 37, y: 4}
   - name: Playe_Run_Frame_8
     originalName: 
-    pivot: {x: 0.44, y: -0.47058824}
+    pivot: {x: 0.44, y: -0.6451613}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 46
+      y: 4
       width: 25
-      height: 34
+      height: 31
     spriteID: 6691c415fbe28eb48b32148533d07797
     spriteBone: []
     spriteOutline: []
@@ -298,7 +298,67 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 46}
+    uvTransform: {x: 4, y: 4}
+  - name: Playe_Run_Frame_9
+    originalName: 
+    pivot: {x: 0.45833334, y: -0.5625}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 203
+      width: 24
+      height: 32
+    spriteID: 3f4d8c0271b23bd4e97d6e2c76e4d6d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 203}
+  - name: Playe_Run_Frame_10
+    originalName: 
+    pivot: {x: 0.45833334, y: -0.516129}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 159
+      width: 24
+      height: 31
+    spriteID: 1cb1c6673f8aa724fb93c778127ea076
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 159}
+  - name: Playe_Run_Frame_11
+    originalName: 
+    pivot: {x: 0.45833334, y: -0.516129}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 198
+      width: 24
+      height: 31
+    spriteID: 846ddfbcff39c6a47af57ce38f9e9f59
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 198}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -312,33 +372,33 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 21
-        y: 16
+        y: 18
         width: 24
-        height: 33
+        height: 31
       spriteId: 2ebab8a65dfdd894cbdd63a2bdab87f4
     - name: Playe_Run_Frame_1
       frameIndex: 1
       cellRect:
         x: 21
-        y: 16
+        y: 19
         width: 24
-        height: 34
+        height: 32
       spriteId: e7783cd027baf314c8ed415fc5440772
     - name: Playe_Run_Frame_2
       frameIndex: 2
       cellRect:
         x: 21
-        y: 16
+        y: 19
         width: 24
-        height: 34
+        height: 32
       spriteId: fc49a7a6572440a4bb73505a5b623f68
     - name: Playe_Run_Frame_3
       frameIndex: 3
       cellRect:
         x: 21
-        y: 16
+        y: 18
         width: 24
-        height: 33
+        height: 31
       spriteId: d5abfbbcbc5c40a4ba0b1e415530841e
     - name: Playe_Run_Frame_4
       frameIndex: 4
@@ -360,26 +420,50 @@ ScriptedImporter:
       frameIndex: 6
       cellRect:
         x: 21
-        y: 16
+        y: 19
         width: 24
-        height: 33
+        height: 31
       spriteId: ded6562626574c747af971af3ba22939
     - name: Playe_Run_Frame_7
       frameIndex: 7
       cellRect:
         x: 21
-        y: 16
+        y: 20
         width: 25
-        height: 34
+        height: 30
       spriteId: d76c3554f9590234484a1ddfe4d66518
     - name: Playe_Run_Frame_8
       frameIndex: 8
       cellRect:
         x: 21
-        y: 16
+        y: 20
         width: 25
-        height: 34
+        height: 31
       spriteId: 6691c415fbe28eb48b32148533d07797
+    - name: Playe_Run_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 21
+        y: 18
+        width: 24
+        height: 32
+      spriteId: 3f4d8c0271b23bd4e97d6e2c76e4d6d6
+    - name: Playe_Run_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 21
+        y: 16
+        width: 24
+        height: 31
+      spriteId: 1cb1c6673f8aa724fb93c778127ea076
+    - name: Playe_Run_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 21
+        y: 16
+        width: 24
+        height: 31
+      spriteId: 846ddfbcff39c6a47af57ce38f9e9f59
     linkedCells: []
     parentIndex: -1
   platformSettings:

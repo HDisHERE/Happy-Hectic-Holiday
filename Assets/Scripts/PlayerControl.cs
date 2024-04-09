@@ -101,7 +101,7 @@ public class PlayerControl : MonoBehaviour
     [Header("Items:")]
     //GrapplingHook
     [Header("GrapplingHook:")]
-    Tutorial_GrapplingGun hookGun;
+    //Tutorial_GrapplingGun hookGun;
     public static bool hasGrapple;
     public bool isUsingHook;
     public GameObject GunPivot;
@@ -129,6 +129,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("StopWatch:")]
 
+    public GameObject StopWatch;
     public bool isStopping;
     public static bool hasWatch;
     private bool abilitytoStop = false;
@@ -159,7 +160,7 @@ public class PlayerControl : MonoBehaviour
         rightWallTf = transform.Find("Rightwall");
         KillTf = transform.Find("Killpoint");
         leftPresstime = rightPresstime = -maxWaittime;
-        hookGun= GetComponent <Tutorial_GrapplingGun>();
+        //hookGun= GetComponent <Tutorial_GrapplingGun>();
         
         ani = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("ground");
@@ -236,7 +237,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(SCrash());
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&abilitytoStop)
         {
             StartCoroutine(TimetoMove());
         }
@@ -302,7 +303,15 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                ani.Play("playerRun");
+                if(MathF.Abs(rb.velocity.x)<=20)
+                {
+                    ani.Play("playerRun");
+                }
+                
+                else
+                {
+                    ani.Play("playerDash");
+                }
             }
 
         }
@@ -719,7 +728,7 @@ public class PlayerControl : MonoBehaviour
 
     public void EnableShoes()
     {
-        hasGrapple = true;
+        hasGrapple = false;
         hasShield = false;
         hasShoes = true;
         hasWatch = false;
@@ -733,7 +742,7 @@ public class PlayerControl : MonoBehaviour
         hasGrapple = false;
         hasShield = false;
         hasShoes = false;
-        hasWatch = false;
+        hasWatch = true;
         abilitytoCrash = false;
         abilitytoStop = true;
 
