@@ -103,8 +103,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0924683, y: 21.065125}
-  m_SizeDelta: {x: 463.377, y: 71.6202}
+  m_AnchoredPosition: {x: 5.454761, y: 19.478727}
+  m_SizeDelta: {x: 472.1015, y: 71.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4603779615596369693
 CanvasRenderer:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Press space to respawn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cb3551a6b200e8418754b8bd2a8c679, type: 2}
   m_sharedMaterial: {fileID: -5738461782625112270, guid: 1cb3551a6b200e8418754b8bd2a8c679, type: 2}
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -225,8 +225,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.92156863, b: 0.47058824, a: 1}
-    m_PressedColor: {r: 0.745283, g: 0.6718484, b: 0.24959952, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -246,19 +246,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5898417405545767925}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9133405800913334699}
-        m_TargetAssemblyTypeName: SceneLoaderScript, Assembly-CSharp
-        m_MethodName: Restart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: currentScene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1061765870713899274
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,8 +282,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.1087036, y: 24}
-  m_SizeDelta: {x: 463.377, y: 71.6202}
+  m_AnchoredPosition: {x: 2.8702, y: 22.533}
+  m_SizeDelta: {x: 556.9672, y: 68.685}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6512513128528255792
 CanvasRenderer:
@@ -325,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Press space to respawn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cb3551a6b200e8418754b8bd2a8c679, type: 2}
   m_sharedMaterial: {fileID: -5738461782625112270, guid: 1cb3551a6b200e8418754b8bd2a8c679, type: 2}
@@ -352,8 +340,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -416,8 +404,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.92156863, b: 0.47058824, a: 1}
-    m_PressedColor: {r: 0.745283, g: 0.6718484, b: 0.24959952, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -437,19 +425,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1259734649030883539}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9133405800913334699}
-        m_TargetAssemblyTypeName: SceneLoaderScript, Assembly-CSharp
-        m_MethodName: Restart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: currentScene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1792917851541890761
 GameObject:
   m_ObjectHideFlags: 0
