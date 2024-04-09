@@ -184,6 +184,7 @@ public class PlayerControl : MonoBehaviour
         if (hasShield)
         {
             Shield.SetActive(true);
+            EnableShield();
         }
         if (hasGrapple)
         {
@@ -192,10 +193,15 @@ public class PlayerControl : MonoBehaviour
         }
         if(hasShoes)
         {
-                Shoes.SetActive(true);
+            Shoes.SetActive(true);
+            EnableShoes();
         }
         
-
+        if(hasWatch)
+        {
+            StopWatch.SetActive(true);
+            EnableWatch();
+        }
     }
 
     // Update is called once per frame
