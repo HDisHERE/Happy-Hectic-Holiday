@@ -129,6 +129,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("StopWatch:")]
 
+    public GameObject StopWatch;
     public bool isStopping;
     public static bool hasWatch;
     private bool abilitytoStop = false;
@@ -236,7 +237,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(SCrash());
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&abilitytoStop)
         {
             StartCoroutine(TimetoMove());
         }
